@@ -1,0 +1,12 @@
+diff a/API/API.csproj b/API/API.csproj	(rejected hunks)
+@@ -288,6 +288,10 @@
+     <Compile Include="Migrations\201902281721381_UpdateEventComment.Designer.cs">
+       <DependentUpon>201902281721381_UpdateEventComment.cs</DependentUpon>
+     </Compile>
++    <Compile Include="Migrations\201903040745183_description-fields.cs" />
++    <Compile Include="Migrations\201903040745183_description-fields.Designer.cs">
++      <DependentUpon>201903040745183_description-fields.cs</DependentUpon>
++    </Compile>
+     <Compile Include="Models\Account.cs" />
+     <Compile Include="Models\Activity.cs" />
+     <Compile Include="Models\Configuration.cs" />
