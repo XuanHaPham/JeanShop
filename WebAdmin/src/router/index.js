@@ -11,6 +11,7 @@ const UserManagement = () => import('@/views/UserManagement')
 const AdminManagement = () => import('@/views/AdminManagement')
 const RoleManagement = () => import('@/views/RoleManagement')
 const OrganizationManagement = () => import('@/views/OrganizationManagement')
+const ProductManagement = () => import('@/views/ProductManagement')
 const EventManagement = () => import('@/views/EventManagement')
 const EventTypeManagement = () => import('@/views/EventTypeManagement')
 const NewsManagement = () => import('@/views/NewsManagement')
@@ -103,6 +104,16 @@ export default new Router({
         },
         {
           path: 'organizations',
+          name: 'OrganizationManagement',
+          component: OrganizationManagement
+        },
+        {
+          path: 'products',
+          name: 'ProductManagement',
+          component: ProductManagement
+        },
+        {
+          path: 'categories',
           name: 'OrganizationManagement',
           component: OrganizationManagement
         },

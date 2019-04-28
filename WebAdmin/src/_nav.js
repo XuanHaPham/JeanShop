@@ -41,13 +41,23 @@ export default {
       icon: 'icon-directions'
     },
     {
-      name: 'Organizations',
+      name: 'Products',
       url: '/',
       icon: 'icon-globe',
       children: [
         {
           name: 'Organizations',
           url: '/organizations',
+          icon: 'icon-globe'
+        },
+        {
+          name: 'Product',
+          url: '/products',
+          icon: 'icon-globe'
+        },
+        {
+          name: 'Category',
+          url: '/categories',
           icon: 'icon-globe'
         }
       ]
