@@ -46,17 +46,17 @@ export default {
       icon: 'icon-globe',
       children: [
         {
-          name: 'Organizations',
+          name: 'Organizations(DELETE LATER)',
           url: '/organizations',
           icon: 'icon-globe'
         },
         {
-          name: 'Product',
+          name: 'Products',
           url: '/products',
           icon: 'icon-globe'
         },
         {
-          name: 'Category',
+          name: 'Categories',
           url: '/categories',
           icon: 'icon-globe'
         }

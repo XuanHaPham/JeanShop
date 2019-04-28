@@ -10,7 +10,7 @@
       </b-col>
 
       <b-col :lg="current ? viewMembers ? 4 : 6 : 12">
-        <c-table :table-data="items" :fields="fields" hover caption="Organizations" :rowClicked="rowClicked"></c-table>
+        <c-table :table-data="items" :fields="fields" hover caption="Categories" :rowClicked="rowClicked"></c-table>
       </b-col>
 
       <b-col :lg="viewMembers ? 4 : 6" v-if="current" class="animated fadeIn">
@@ -78,9 +78,6 @@ export default {
       fields: [
         {key: 'ID', sortable: true},
         {key: 'Name', sortable: true},
-        {key: 'Description'},
-        {key: 'TimeCreate', sortable: true},
-        {key: 'Creator', formatter: id => `User`},
         {key: 'status'}
       ],
     }
@@ -97,8 +94,8 @@ export default {
         this.items = data;
       })
     },
-    rowClicked: function(organization, i) {
-      this.current = organization;
+    rowClicked: function(category, i) {
+      this.current = category;
       this.viewMembers = false;
     },
     hideSuccess: function() {
