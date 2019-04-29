@@ -85,6 +85,11 @@ export default {
       icon: 'icon-book-open'
     },
     {
+      name: 'Order',
+      url: '/order',
+      icon: 'icon-book-open'
+    },
+    {
       title: true,
       name: 'System',
       class: '',

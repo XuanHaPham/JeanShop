@@ -16,6 +16,7 @@ const CategoryManagement = () => import('@/views/CategoryManagement')
 const EventManagement = () => import('@/views/EventManagement')
 const EventTypeManagement = () => import('@/views/EventTypeManagement')
 const NewsManagement = () => import('@/views/NewsManagement')
+const OrderManagement = () => import('@/views/OrderManagement')
 const ConfigurationManagement = () => import('@/views/ConfigurationManagement')
 const SystemInformation = () => import('@/views/SystemInformation')
 
@@ -137,6 +138,11 @@ export default new Router({
           path: 'news',
           name: 'NewsManagement',
           component: NewsManagement
+        },
+        {
+          path: 'order',
+          name: 'OrderManagement',
+          component: OrderManagement
         },
         {
           path: 'configurations',

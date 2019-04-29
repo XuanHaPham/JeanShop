@@ -31,11 +31,19 @@
             </b-form-group>
             
             <b-form-group>
+                <b-input-group>
+                    <b-input-group-prepend class="right-margin"><b-input-group-text>Status</b-input-group-text></b-input-group-prepend>
+                    <c-switch color="primary" variant="3d" v-model="current.Status"/>
+                </b-input-group>
+            </b-form-group>
+
+            <!-- <b-form-group>
               <b-input-group-prepend>
                 <b-input-group-text>Status</b-input-group-text>
                 </b-input-group-prepend>
               <c-switch color="primary" variant="3d" v-model="current.Status"/>
-            </b-form-group>
+            </b-form-group> -->
+
             <div
               class="btn-group form-actions animated fadeIn"
               v-if="!detailMessage && current.ID !== 0"
