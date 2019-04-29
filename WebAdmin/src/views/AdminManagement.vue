@@ -32,7 +32,7 @@
                 <b-input-group-prepend>
                   <b-input-group-text>{{field.key}}</b-input-group-text>
                 </b-input-group-prepend>
-                <b-form-input type="text" v-model="current[field.key]"></b-form-input>
+                <b-form-input disabled type="text" v-model="current[field.key]"></b-form-input>
               </b-input-group>
             </b-form-group>
             <!-- <b-form-group>
@@ -73,8 +73,9 @@ export default {
       current: null,
       detailMessage: "",
       fields: [
-        { key: "UserName", sortable: true },
+        { key: "Email", sortable: true },
         { key: "Fullname", sortable: true },
+        { key: "Phone" }
       ]
     };
   },
