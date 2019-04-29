@@ -85,6 +85,11 @@ export default {
       icon: 'icon-book-open'
     },
     {
+      name: 'Channel',
+      url: '/channel',
+      icon: 'icon-book-open'
+    },
+    {
       name: 'Order',
       url: '/order',
       icon: 'icon-book-open'
