@@ -35,15 +35,15 @@
                 <b-form-input type="text" v-model="current[field.key]"></b-form-input>
               </b-input-group>
             </b-form-group>
-            <b-form-group>
+            <!-- <b-form-group>
               <c-switch color="primary" variant="3d" v-model="current.status"/>
-            </b-form-group>
+            </b-form-group> -->
             <div
               class="btn-group form-actions animated fadeIn"
               v-if="!detailMessage && current.ID !== 0"
             >
-              <b-button @click="update" type="submit" variant="outline-primary">Update</b-button>
-              <b-button @click="remove" type="reset" variant="outline-danger">Remove</b-button>
+              <!-- <b-button @click="update" type="submit" variant="outline-primary">Update</b-button> -->
+              <!-- <b-button @click="remove" type="reset" variant="outline-danger">Remove</b-button> -->
             </div>
             <div class="form-actions animated fadeIn" v-if="!detailMessage && current.ID === 0">
               <b-button @click="add" type="submit" block variant="outline-primary">Add</b-button>
