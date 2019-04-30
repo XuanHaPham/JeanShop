@@ -82,7 +82,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/dashboard',
+      redirect: '/profile',
       name: 'Home',
       component: DefaultContainer,
       children: [

@@ -1,6 +1,6 @@
 export default {
   items: [
-    {
+    /* {
       name: 'Dashboard',
       url: '/dashboard',
       icon: 'icon-speedometer',
@@ -8,10 +8,11 @@ export default {
         variant: 'primary',
         text: 'Home'
       }
-    },
+    }, */
+
     {
       title: true,
-      name: 'Volunteers',
+      name: 'Navigation',
       class: '',
       wrapper: {
         element: '',
@@ -45,11 +46,11 @@ export default {
       url: '/',
       icon: 'icon-screen-smartphone',
       children: [
-        {
+        /* {
           name: 'Organizations(DELETE LATER)',
           url: '/organizations',
           icon: 'icon-globe'
-        },
+        }, */
         {
           name: 'Products',
           url: '/products',
@@ -62,7 +63,8 @@ export default {
         }
       ]
     },
-    {
+
+    /* {
       name: 'Events',
       url: '/',
       icon: 'icon-flag',
@@ -78,12 +80,14 @@ export default {
           icon: 'icon-flag'
         }
       ]
-    },
-    {
+    }, */
+
+    /* {
       name: 'News',
       url: '/news',
       icon: 'icon-book-open'
-    },
+    }, */
+
     {
       name: 'Feedback',
       url: '/feedback',
@@ -99,7 +103,8 @@ export default {
       url: '/order',
       icon: 'icon-book-open'
     },
-    {
+
+    /* {
       title: true,
       name: 'System',
       class: '',
@@ -107,8 +112,9 @@ export default {
         element: '',
         attributes: {}
       }
-    },
-    {
+    }, */
+
+    /* {
       name: 'Configurations',
       url: '/configurations',
       icon: 'icon-puzzle'
@@ -117,6 +123,7 @@ export default {
       name: 'System Information',
       url: '/systems',
       icon: 'icon-info'
-    }
+    } */
+
   ]
 }
