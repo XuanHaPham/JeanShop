@@ -38,12 +38,12 @@ export default {
     {
       name: 'Roles',
       url: '/roles',
-      icon: 'icon-directions'
+      icon: 'icon-flag'
     },
     {
       name: 'Products',
       url: '/',
-      icon: 'icon-globe',
+      icon: 'icon-screen-smartphone',
       children: [
         {
           name: 'Organizations(DELETE LATER)',
@@ -53,7 +53,7 @@ export default {
         {
           name: 'Products',
           url: '/products',
-          icon: 'icon-globe'
+          icon: 'icon-calculator'
         },
         {
           name: 'Categories',
@@ -87,12 +87,12 @@ export default {
     {
       name: 'Feedback',
       url: '/feedback',
-      icon: 'icon-book-open'
+      icon: 'icon-heart'
     },
     {
       name: 'Channel',
       url: '/channel',
-      icon: 'icon-book-open'
+      icon: 'icon-directions'
     },
     {
       name: 'Order',
