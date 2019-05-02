@@ -38,7 +38,7 @@
               <c-switch color="primary" variant="3d" v-model="current.status"/>
             </b-form-group>
             <div class="btn-group form-actions animated fadeIn" v-if="!detailMessage && current.ID !== 0">
-              <b-button @click="viewMembers = true" type="submit" variant="outline-primary">View Members</b-button>
+              <!-- <b-button @click="viewMembers = true" type="submit" variant="outline-primary">View Members</b-button> -->
               <b-button @click="update" type="submit" variant="outline-primary">Update</b-button>
               <b-button @click="remove" type="reset" variant="outline-danger">Remove</b-button>
             </div>

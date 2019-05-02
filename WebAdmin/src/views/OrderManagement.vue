@@ -175,6 +175,7 @@ export default {
       detailMessage: "",
       fields: [
         { key: "ID", sortable: true },
+        { key: "OrderDetails" },
         { key: "Customer Name", sortable: true },
         { key: "Channel", sortable: true },
         { key: "Sub Total", sortable: true },
@@ -183,7 +184,7 @@ export default {
         { key: "Code", sortable: true },
         { key: "TimeCreated", sortable: true },
         { key: "NoteForDeliver" },
-        { key: "Status" }
+        { key: "Status", sortable: true}
       ]
     };
   },
