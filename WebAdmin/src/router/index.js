@@ -11,9 +11,14 @@ const UserManagement = () => import('@/views/UserManagement')
 const AdminManagement = () => import('@/views/AdminManagement')
 const RoleManagement = () => import('@/views/RoleManagement')
 const OrganizationManagement = () => import('@/views/OrganizationManagement')
+const ProductManagement = () => import('@/views/ProductManagement')
+const CategoryManagement = () => import('@/views/CategoryManagement')
 const EventManagement = () => import('@/views/EventManagement')
 const EventTypeManagement = () => import('@/views/EventTypeManagement')
 const NewsManagement = () => import('@/views/NewsManagement')
+const FeedbackManagement = () => import('@/views/FeedbackManagement')
+const ChannelManagement = () => import('@/views/ChannelManagement')
+const OrderManagement = () => import('@/views/OrderManagement')
 const ConfigurationManagement = () => import('@/views/ConfigurationManagement')
 const SystemInformation = () => import('@/views/SystemInformation')
 
@@ -77,7 +82,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/dashboard',
+      redirect: '/profile',
       name: 'Home',
       component: DefaultContainer,
       children: [
@@ -107,6 +112,16 @@ export default new Router({
           component: OrganizationManagement
         },
         {
+          path: 'products',
+          name: 'ProductManagement',
+          component: ProductManagement
+        },
+        {
+          path: 'categories',
+          name: 'CategoryManagement',
+          component: CategoryManagement
+        },
+        {
           path: 'roles',
           name: 'RoleManagement',
           component: RoleManagement
@@ -125,6 +140,21 @@ export default new Router({
           path: 'news',
           name: 'NewsManagement',
           component: NewsManagement
+        },
+        {
+          path: 'feedback',
+          name: 'FeedbackManagement',
+          component: FeedbackManagement
+        },
+        {
+          path: 'channel',
+          name: 'ChannelManagement',
+          component: ChannelManagement
+        },
+        {
+          path: 'order',
+          name: 'OrderManagement',
+          component: OrderManagement
         },
         {
           path: 'configurations',

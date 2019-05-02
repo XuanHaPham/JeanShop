@@ -81,7 +81,7 @@ export default {
         {key: 'Description'},
         {key: 'TimeCreate', sortable: true},
         {key: 'Creator', formatter: id => `User`},
-        {key: 'status'}
+        {key: 'Status'}
       ],
     }
   },

@@ -1,6 +1,6 @@
 export default {
   items: [
-    {
+    /* {
       name: 'Dashboard',
       url: '/dashboard',
       icon: 'icon-speedometer',
@@ -8,10 +8,11 @@ export default {
         variant: 'primary',
         text: 'Home'
       }
-    },
+    }, */
+
     {
       title: true,
-      name: 'Volunteers',
+      name: 'Navigation',
       class: '',
       wrapper: {
         element: '',
@@ -38,21 +39,32 @@ export default {
     {
       name: 'Roles',
       url: '/roles',
-      icon: 'icon-directions'
+      icon: 'icon-flag'
     },
     {
-      name: 'Organizations',
+      name: 'Products',
       url: '/',
-      icon: 'icon-globe',
+      icon: 'icon-screen-smartphone',
       children: [
-        {
-          name: 'Organizations',
+        /* {
+          name: 'Organizations(DELETE LATER)',
           url: '/organizations',
+          icon: 'icon-globe'
+        }, */
+        {
+          name: 'Products',
+          url: '/products',
+          icon: 'icon-calculator'
+        },
+        {
+          name: 'Categories',
+          url: '/categories',
           icon: 'icon-globe'
         }
       ]
     },
-    {
+
+    /* {
       name: 'Events',
       url: '/',
       icon: 'icon-flag',
@@ -68,13 +80,31 @@ export default {
           icon: 'icon-flag'
         }
       ]
-    },
-    {
+    }, */
+
+    /* {
       name: 'News',
       url: '/news',
       icon: 'icon-book-open'
+    }, */
+
+    {
+      name: 'Feedback',
+      url: '/feedback',
+      icon: 'icon-heart'
     },
     {
+      name: 'Channel',
+      url: '/channel',
+      icon: 'icon-directions'
+    },
+    {
+      name: 'Order',
+      url: '/order',
+      icon: 'icon-book-open'
+    },
+
+    /* {
       title: true,
       name: 'System',
       class: '',
@@ -82,8 +112,9 @@ export default {
         element: '',
         attributes: {}
       }
-    },
-    {
+    }, */
+
+    /* {
       name: 'Configurations',
       url: '/configurations',
       icon: 'icon-puzzle'
@@ -92,6 +123,7 @@ export default {
       name: 'System Information',
       url: '/systems',
       icon: 'icon-info'
-    }
+    } */
+
   ]
 }

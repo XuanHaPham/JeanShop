@@ -21,23 +21,29 @@
       <b-col lg="6" v-if="current" class="animated fadeIn">
         <b-card class="card-accent-info" :header="'Detail of `' + current.Name + '`'">
           <b-form>
-            <b-input-group v-show="current.ID != 0">
-              <b-input-group-prepend>
-                <b-input-group-text>ID</b-input-group-text>
-              </b-input-group-prepend>
-              <b-form-input disabled type="text" v-model="current.ID"></b-form-input>
-            </b-input-group>
             <b-form-group v-for="field in fields" :key="field.key">
-              <b-input-group v-if="['ID', 'status'].indexOf(field.key) === -1">
+              <b-input-group v-if="['Status'].indexOf(field.key) === -1">
                 <b-input-group-prepend>
                   <b-input-group-text>{{field.key}}</b-input-group-text>
                 </b-input-group-prepend>
-                <b-form-input type="text" v-model="current[field.key]"></b-form-input>
+                <b-form-input disabled type="text" v-model="current[field.key]"></b-form-input>
               </b-input-group>
             </b-form-group>
+            
             <b-form-group>
-              <c-switch color="primary" variant="3d" v-model="current.status"/>
+                <b-input-group>
+                    <b-input-group-prepend class="right-margin"><b-input-group-text>Status</b-input-group-text></b-input-group-prepend>
+                    <c-switch color="primary" variant="3d" v-model="current.Status"/>
+                </b-input-group>
             </b-form-group>
+
+            <!-- <b-form-group>
+              <b-input-group-prepend>
+                <b-input-group-text>Status</b-input-group-text>
+                </b-input-group-prepend>
+              <c-switch color="primary" variant="3d" v-model="current.Status"/>
+            </b-form-group> -->
+
             <div
               class="btn-group form-actions animated fadeIn"
               v-if="!detailMessage && current.ID !== 0"
@@ -73,9 +79,16 @@ export default {
       current: null,
       detailMessage: "",
       fields: [
+        { key: "ID", sortable: true },
         { key: "UserName", sortable: true },
         { key: "Fullname", sortable: true },
-        { key: "Status" }
+        { key: "Email", sortable: true },
+        { key: "Phone" },
+        { key: "Address" },
+        { key: "Date of Birth", sortable: true },
+        { key: "Point", sortable: true },
+        { key: "Shipping Address", sortable: true },
+        { key: "Status" },
       ]
     };
   },
