@@ -11,7 +11,7 @@
 					<div class="box" v-for="product in products" :key="product.id">
 						<button class="is-pulled-right button is-info is-inverted" @click="removeFromCart(product.id)">{{ removeLabel }}</button>
 						<p>{{ product.title }}  {{ product.quantity > 0 ?  ` - Quantity: ${product.quantity}` : ''}}</p>
-						<p>{{ product.price }} &euro;</p>
+						<p>{{ product.price }} &dollar;</p>
 					</div>
 					<div v-if="products.length === 0">
 						<p>{{ cartEmptyLabel }}</p>
@@ -23,7 +23,7 @@
 			</section>
 			<footer class="modal-card-foot">
 				<button v-show="products.length > 0 && !isCheckoutSection" class="button is-success" @click="onNextBtn">{{ buyLabel }}</button>
-				<button v-if="isCheckoutSection" class="button is-success" @click="closeModal(true)">{{ closeLabel }}</button>
+				<button v-if="isCheckoutSection" class="ubtton is-success" @click="closeModal(true)">{{ closeLabel }}</button>
 			</footer>
 		</div>
 	</div>
@@ -78,7 +78,7 @@ export default {
 				} else {
 					productLabel = 'product';
 				}
-				return `Buy ${totalProducts} ${productLabel} at ${finalPrice}€`;
+				return `Buy ${totalProducts} ${productLabel} at ${finalPrice}$`;
 		},
 		isUserLoggedIn () {
 			return this.$store.getters.isUserLoggedIn;
