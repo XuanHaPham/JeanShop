@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer> {
 
-    @Query("SELECT a FROM Account a WHERE a.username = :username AND a.password = :password AND a.status = false")
+    @Query("SELECT a FROM Account a WHERE a.email = :username AND a.password = :password AND a.status = true")
     Account findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 
     @Query("SELECT a FROM Account a WHERE a.status = false ")

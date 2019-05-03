@@ -8,7 +8,11 @@ public interface ProductService {
 
     List<ProductDTO> getAll();
 
-//    Boolean delete(Integer id);
+    List<ProductDTO> findByCategoryID(Integer id);
+
+    Boolean deleteByID(Integer id);
+
+    ProductDTO findByID(Integer id);
 //
 //    ProductDTO insert(ProductDTO productDTO);
 //
