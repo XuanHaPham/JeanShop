@@ -135,11 +135,16 @@ export default {
         requestToken(this.email, this.password).then(data => {
         // this.loading = false;
         if (data.username != null) {
-          setToken(data);
+          // setToken(data);
           this.$store.commit('setUserName', data.username);
+          this.$store.commit('setEmail', data.email);
+          this.$store.commit('setPhoneNumber', data.phoneNumber);
+          this.$store.commit('setAddress', data.address);
+          this.$store.commit('setAddress1', data.shippingAddress);
+          this.$store.commit('setDOB', data.dob);
+          this.$store.commit('setFullName', data.fullName);
+          this.$store.commit('setID', data.ID);
           this.isUserCheckLogin=false;
-          this.message = 'Login successful. Redirecting to dashboard...';
-          this.color = 'green';
           this.$store.commit('isUserLoggedIn', this.isFormSuccess);
           // this.$router.push('/');
         } else {

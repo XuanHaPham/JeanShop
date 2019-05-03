@@ -22,23 +22,27 @@
                 </tr>
                 <tr>
                   <td>Fullname:</td>
-                  <td>miniondespicable.me</td>
+                  <td>{{ getFullname }}</td>
+                </tr>
+                <tr>
+                  <td>Day of birth:</td>
+                  <td>{{ getDOB }}</td>
                 </tr>
                 <tr>
                   <td>Address 1:</td>
-                  <td>Guru's Lab</td>
+                  <td>{{ getAddress }}</td>
                 </tr>
                 <tr>
                   <td>Address 2:</td>
-                  <td>Guru's Lab</td>
+                  <td>{{ getAddress1 }}</td>
                 </tr>
                 <tr>
                   <td>Phone:</td>
-                  <td>0123-456789</td>
+                  <td>{{ getPhoneNumber }}</td>
                 </tr>
                 <tr>
                   <td>Email:</td>
-                  <td>minion@despicable.me</td>
+                  <td>{{ getEmail }}</td>
                 </tr>
               </table>
             </div>
@@ -93,7 +97,7 @@ openModal () {
       }
     },
 
-  getUserName () {
+getUserName () {
 			let name = this.$store.getters.getUserName;
 			
 			if (name === '') {
@@ -101,7 +105,64 @@ openModal () {
 			} else {
 				return name;
 			}
-		}
+    },
+    
+getAddress() {
+      let name = this.$store.getters.getAddress;
+      if (name === '') {
+				return 'user';
+			} else {
+				return name;
+			}
+},
+
+ getAddress1() {
+  let name = this.$store.getters.getAddress1;
+  if (name === '') {
+				return 'user';
+			} else {
+				return name;
+			}
+},
+
+ getPhoneNumber() {
+  let name = this.$store.getters.getPhoneNumber;
+  if (name === '') {
+				return 'user';
+			} else {
+				return name;
+			}
+},
+
+ getDOB() {
+  let name = this.$store.getters.getDOB;
+  if (name === '') {
+				return 'user';
+			} else {
+				return name;
+			}
+},
+
+ getEmail() {
+  let name = this.$store.getters.getEmail;
+  if (name === '') {
+				return 'user';
+			} else {
+				return name;
+			}
+},
+
+
+ getFullname() {
+  let name = this.$store.getters.getFullname;
+  if (name === '') {
+				return 'user';
+			} else {
+				return name;
+			}
+},
+
+    
 },
 
  methods: {

@@ -226,7 +226,6 @@ export default {
           this.highlightRepeatPasswordWithError = false;
         } else {
           this.highlightRepeatPasswordWithError = true; 
-          this.repeatPassword=false;
         }
       } else {
         this.highlightRepeatPasswordWithError = true;

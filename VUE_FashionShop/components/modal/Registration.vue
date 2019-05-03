@@ -213,6 +213,17 @@
 <script>
 import { isValidEmail } from '@/assets/validators';
 
+import { base, openapi, methods, routes, setToken, requestToken, register } from '@/store/index.js'
+// export const users = {
+//     address,
+//   dob: '',
+//   email: '',
+//   fullName: '',
+//   password: '',
+//   phoneNumber: 0,
+//   shippingAddress: '',
+//   username: ''
+// };
 export default {
   name: 'registration',
 
@@ -249,6 +260,7 @@ export default {
       fullname:'',
       DOB:'',
       phone:'',
+      current:'',
       highlightFullNameWithError: null,
       highlightNameWithError: null,
       highlightDOBWithError: null,
@@ -261,6 +273,7 @@ export default {
       isFormSuccess: false
     };
   },
+  
 
   computed: {
     isUserSignedUp () {
@@ -293,10 +306,66 @@ export default {
         this.highlightAddress1WithError= false;
         this.highlightPhoneWithError=false;
         
+    //     this.users.username= this.name;
+    //     this.users.password=this.password;
+    //     this.users.email=this.email;
+    //     this.users.phoneNumber= this.phone;
+    //   this.users.address= this.address;
+    //  this.users.fullName= this.fullName;
+    //  this.users.dob=this.DOB;
+    //  this.users.shippingAddress=this.address1;
+
+      const dataToSend = JSON.stringify({
+        "address": this.address,
+      "dob": this.DOB,
+      "email": this.email,
+       "fullName": this.fullname,
+      "password": this.repeatPassword,
+       "phoneNumber": this.phone,
+       "shippingAddress": this.address1,
+  "username": this.name
+        });
+        this.modalTitlemoemodgimstered=dataToSend.phone;
+        openapi(methods.POST, routes.ACCOUNT, this.dataToSend).then(data => {
+        this.detailMessage = 'Added successfully!'; 
+        // this.items.push(data);
+        this.current = data;
         this.isFormSuccess = true;
-        this.$store.commit('setUserName', this.name);
+          
+        this.$store.commit('setUserName', data.username);
         this.$store.commit('isUserSignedUp', this.isFormSuccess);
         this.$store.commit('isUserLoggedIn', this.isFormSuccess);
+      });
+    // let dataRecieved=""; 
+    // fetch("http://localhost:8080/accounts",{credentials:'same-origin',mode:'same-origin',method:"post",body:JSON.stringify(dataToSend)})
+    //           .then(resp => {
+    //             if(resp.status==200){
+    //                return resp.json()
+    //             }else{
+    //                 console.log("Status: "+resp.status);
+    //                 return Promise.reject("server")
+    //             }
+    //           })
+    //        .then(dataJson =>{
+    //              dataToRecieved = JSON.parse(dataJson);
+    //          })
+    //           .catch(err =>{
+    //             if(err=="server")return
+    //             console.log(err);
+    //         })
+            
+
+        this.isFormSuccess = true;
+        // this.$store.commit('setUserName', this.name);
+        // this.$store.commit('isUserSignedUp', this.isFormSuccess);
+        // this.$store.commit('isUserLoggedIn', this.isFormSuccess);
+
+        //   this.$store.commit('setEmail', this.email);
+        //   this.$store.commit('setPhoneNumber', this.phone);
+        //   this.$store.commit('setAddress', this.address);
+        //   this.$store.commit('setAddress1', this.address1);
+        //   this.$store.commit('setDOB', this.DOB);
+        //   this.$store.commit('setFullName', this.fullname);
       }
 
       if (!this.fullname) {
