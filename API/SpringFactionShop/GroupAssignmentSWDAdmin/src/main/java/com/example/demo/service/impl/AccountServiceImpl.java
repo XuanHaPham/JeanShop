@@ -33,7 +33,8 @@ public class AccountServiceImpl implements AccountService {
             return null;
         }
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(account, AccountDTO.class);
+        AccountDTO accountDTO = modelMapper.map(account, AccountDTO.class);
+        return accountDTO;
     }
 
     @Override

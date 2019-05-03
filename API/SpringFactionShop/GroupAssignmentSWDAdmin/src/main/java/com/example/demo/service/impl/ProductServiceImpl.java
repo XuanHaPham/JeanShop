@@ -6,10 +6,13 @@ import com.example.demo.service.ProductService;
 import com.example.demo.service.dto.ProductDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -26,18 +29,41 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = productRepository.findAllProduct();
         List<ProductDTO> productDTOS = new ArrayList<>();
         ModelMapper modelMapper = new ModelMapper();
-        for (Product acc : products ) {
-            productDTOS.add(modelMapper.map(acc, ProductDTO.class));
+        for (Product pro : products ) {
+            productDTOS.add(modelMapper.map(pro, ProductDTO.class));
 
         }
         return productDTOS;
     }
 
-//    @Override
-//    Boolean delete(Integer id){
-//        return 0;
-//    }
-//
+    @Override
+    public List<ProductDTO> findByCategoryID(Integer catergoryID){
+        List<Product> products = productRepository.findByCategoryID(catergoryID);
+        List<ProductDTO> productDTOS = new ArrayList<>();
+        ModelMapper modelMapper = new ModelMapper();
+        for (Product pro : products ) {
+            productDTOS.add(modelMapper.map(pro, ProductDTO.class));
+
+        }
+        return productDTOS;
+    }
+    @Override
+    public Boolean deleteByID(Integer id){
+        Optional.ofNullable(productRepository.findById(id)).orElseThrow(() ->new EntityNotFoundException());
+        productRepository.deleteByID(id);
+        return true;
+    }
+
+    @Override
+    public ProductDTO findByID(Integer id){
+        Product product = productRepository.findByID(id);
+        if(ObjectUtils.isEmpty(product)) {
+            return null;
+        }
+        ModelMapper modelMapper = new ModelMapper();
+        ProductDTO productDTO = modelMapper.map(product, ProductDTO.class);
+        return productDTO;
+    }
 //    @Override
 //    ProductDTO insert(ProductDTO productDTO){}
 //
