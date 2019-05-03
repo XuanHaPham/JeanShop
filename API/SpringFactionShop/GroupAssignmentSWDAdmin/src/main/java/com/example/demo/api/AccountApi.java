@@ -29,4 +29,8 @@ public interface AccountApi {
     @DeleteMapping("/{id}")
     ResponseEntity<Map<String, Boolean>> delete(@PathVariable("id") Integer id);
 
+    @ApiOperation(tags = {"Account",}, notes = "", value = "Update password")
+    @PostMapping("/updatePassword")
+    ResponseEntity<Map<String, Boolean>> updatePassword(@PathVariable("password") String password,@PathVariable("sid") Integer id);
+
 }
