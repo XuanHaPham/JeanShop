@@ -3,13 +3,14 @@
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-          <p v-if="!isUserLoggedIn" class="modal-card-title">{{ modalTitle }}</p>
+          <p v-if="!isUserLoggedIn && !isUserCheckLogin" class="modal-card-title">{{ modalTitle }}</p>
           <p v-if="isUserLoggedIn" class="modal-card-title">{{ modalTitleLoggedIn }}</p>
+          <p v-if="isUserCheckLogin" class="modal-card-title">{{ modalTitleCheckLogin }}</p>
           <button class="delete" aria-label="close" @click="closeModal"></button>
       </header>
       <form @submit="checkForm" action="#" method="post">
         <section class="modal-card-body">
-          <div v-if="!isUserLoggedIn">
+          <div v-if="!isUserLoggedIn && !isUserCheckLogin">
             <div class="field">
               <p class="control has-icons-left has-icons-right">
                   <input
@@ -57,10 +58,19 @@
               </div>
             </div>
           </div>
+          <div v-if="isUserCheckLogin" class="level">
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="title">{{ checkLabel }}</p>
+                <p class="heading">Please waiting</p>
+              </div>
+            </div>
+          </div>
         </section>
         <footer class="modal-card-foot">
-          <button v-if="!isUserLoggedIn" type="submit" class="button is-info">{{ primaryBtnLabel }}</button>
+          <button v-if="!isUserLoggedIn && !isUserCheckLogin" type="submit" class="button is-info">{{ primaryBtnLabel }}</button>
           <button v-if="isUserLoggedIn" type="button" class="button is-info" @click="closeModal">{{ btnLoggedInLabel }}</button>
+          <!-- <button v-if="isUserCheckLogin" type="button" class="button is-info" @click="closeModal">{{ btnLoggedInLabel }}</button> -->
         </footer>
       </form>
     </div>
@@ -69,7 +79,7 @@
 
 <script>
 import { isValidEmail } from '@/assets/validators';
-
+import { base, openapi, methods, routes, setToken, requestToken } from '@/store/index.js'
 export default {
   name: 'login',
 
@@ -77,6 +87,7 @@ export default {
     return {
       modalTitle: 'Log in',
       modalTitleLoggedIn: 'Welcome!',
+      modalTitleCheckLogin:'Login....',
       primaryBtnLabel: 'Log in',
       emailRequiredLabel: 'Email required',
       passwordRequiredLabel: 'Password required',
@@ -85,8 +96,10 @@ export default {
       emailPlaceholder: 'Your email',
       email: '',
       password: '',
+      checkLabel:'',
       highlightEmailWithError: null,
       highlightPasswordWithError: null,
+      isUserCheckLogin: false,
       isFormSuccess: false
     };
   },
@@ -107,6 +120,7 @@ export default {
   methods: {
     closeModal () {
       this.$store.commit('showLoginModal', false);
+      this.isUserCheckLogin= false;
     },
     checkForm (e) {
       e.preventDefault();
@@ -115,7 +129,24 @@ export default {
         this.highlightEmailWithError = false;
         this.highlightPasswordWithError = false;
         this.isFormSuccess = true;
-        this.$store.commit('isUserLoggedIn', this.isFormSuccess);
+        // this.$store.commit('isUserLoggedIn', this.isFormSuccess);
+        this.isUserCheckLogin=true;
+        this.checkLabel='Logging...';
+        requestToken(this.email, this.password).then(data => {
+        // this.loading = false;
+        if (data.username != null) {
+          setToken(data);
+          this.$store.commit('setUserName', data.username);
+          this.isUserCheckLogin=false;
+          this.message = 'Login successful. Redirecting to dashboard...';
+          this.color = 'green';
+          this.$store.commit('isUserLoggedIn', this.isFormSuccess);
+          // this.$router.push('/');
+        } else {
+          this.checkLabel='Incorrect username or password';
+          // this.$store.commit('isUserLoggedIn', this.isFormSuccess);
+        }
+      });
       }
 
       if (!this.email) {
@@ -133,6 +164,8 @@ export default {
       } else {
         this.highlightPasswordWithError = false;
       }
+
+
     },
     checkEmailOnKeyUp (emailValue) {
       if (emailValue && isValidEmail(emailValue)) {
