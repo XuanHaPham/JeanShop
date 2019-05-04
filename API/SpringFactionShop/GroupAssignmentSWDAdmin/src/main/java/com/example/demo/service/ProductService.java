@@ -13,8 +13,8 @@ public interface ProductService {
     Boolean deleteByID(Integer id);
 
     ProductDTO findByID(Integer id);
-//
-//    ProductDTO insert(ProductDTO productDTO);
-//
-//    ProductDTO update(ProductDTO productDTO);
+
+    ProductDTO insert(ProductDTO productDTO);
+
+    ProductDTO update(ProductDTO productDTO);
 }

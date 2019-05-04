@@ -14,7 +14,7 @@ public class AccountDTO implements Serializable {
 
     private  String email;
 
-    private int phoneNumber;
+    private String phoneNumber;
 
     private String address;
 
@@ -58,11 +58,11 @@ public class AccountDTO implements Serializable {
         this.email = email;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

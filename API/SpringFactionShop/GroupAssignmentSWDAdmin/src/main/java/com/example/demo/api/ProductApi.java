@@ -27,4 +27,12 @@ public interface ProductApi {
     @ApiOperation(tags = {"Product",}, notes = "", value = "Get product by ID")
     @GetMapping("/findByID")
     ResponseEntity<ProductDTO> findByID(@PathVariable("id") Integer id);
+
+    @ApiOperation(tags = {"Product",}, notes = "", value = "insert product")
+    @PostMapping("")
+    ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO productDTO);
+
+    @ApiOperation(tags = {"Product",}, notes = "", value = "update product")
+    @PutMapping("")
+    ResponseEntity<ProductDTO> update(@RequestBody ProductDTO productDTO);
 }

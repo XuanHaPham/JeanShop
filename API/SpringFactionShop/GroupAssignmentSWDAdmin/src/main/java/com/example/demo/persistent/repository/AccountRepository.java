@@ -22,4 +22,8 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
     @Modifying
     void deleteByID(Integer id);
 
+    @Query("UPDATE Account a SET a.password = :password WHERE a.id = :id")
+    @Modifying
+    void updatePassword(@Param("password") String password, @Param("id") Integer id);
+
 }

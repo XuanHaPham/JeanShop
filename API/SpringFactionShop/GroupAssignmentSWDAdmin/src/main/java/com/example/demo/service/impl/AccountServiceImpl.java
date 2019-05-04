@@ -74,4 +74,11 @@ public class AccountServiceImpl implements AccountService {
         AccountDTO dto = modelMapper.map(account, AccountDTO.class);
         return dto;
     }
+
+    @Override
+    public Boolean updatePassword(String  password, Integer id){
+        Optional.ofNullable(accountRepository.findById(id)).orElseThrow(() ->new EntityNotFoundException());
+        accountRepository.updatePassword(password, id);
+        return true;
+    }
 }
