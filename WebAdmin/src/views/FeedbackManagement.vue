@@ -6,7 +6,7 @@
     <b-row v-if="!loading" class="animated fadeIn">
       <b-col :lg="12">
         <b-button class="mb-2 mr-2" @click="refresh">Refresh</b-button>
-        <b-button class="mb-2" @click="create" variant="primary">Add new Feedback</b-button>
+        <!-- <b-button class="mb-2" @click="create" variant="primary">Add new Feedback</b-button> -->
       </b-col>
 
       <b-col :lg="current ? 6 : 12">
@@ -16,12 +16,13 @@
       <b-col lg="6" v-if="current" class="animated fadeIn">
         <b-card class="card-accent-info" :header="'Detail of `' + current.Title + '`'">
           <b-form>
-            <b-form-group>
+
+            <!-- <b-form-group>
               <b-input-group>
                 <b-input-group-prepend><b-input-group-text>ID</b-input-group-text></b-input-group-prepend>
                 <b-form-input type="text" disabled v-model="current.ID"></b-form-input>
               </b-input-group>
-            </b-form-group>
+            </b-form-group> -->
 
             <b-form-group>
               <b-input-group>
@@ -55,12 +56,12 @@
               </b-input-group>
             </b-form-group> -->
 
-            <b-form-group>
+            <!-- <b-form-group>
               <b-input-group>
                 <b-input-group-prepend><b-input-group-text>Image URL</b-input-group-text></b-input-group-prepend>
                 <b-form-input type="text" v-model="current.ImageURL"></b-form-input>
               </b-input-group>
-            </b-form-group>
+            </b-form-group> -->
 
             <!-- <b-form-group>
                 <b-input-group>
@@ -70,13 +71,15 @@
             </b-form-group> -->
 
             <b-form-group>
-                <b-input-group>
+
+                <!-- <b-input-group>
                     <b-input-group-prepend class="right-margin"><b-input-group-text>Status</b-input-group-text></b-input-group-prepend>
                     <c-switch color="primary" variant="3d" v-model="current.Status"/>
-                </b-input-group>
+                </b-input-group> -->
+
             </b-form-group>
             <div class="btn-group form-actions animated fadeIn" v-if="!detailMessage && current.ID !== ''">
-              <b-button @click="update" type="submit" variant="outline-primary">Update</b-button>
+              <!-- <b-button @click="update" type="submit" variant="outline-primary">Update</b-button> -->
               <b-button @click="remove" type="reset" variant="outline-danger">Remove</b-button>
             </div>
             <div class="form-actions animated fadeIn" v-if="!detailMessage && current.ID === ''">
@@ -113,7 +116,7 @@ export default {
       detailMessage: '',
       fields: [
         {key: 'ID', sortable: true},
-        {key: 'AccountID', sortable: true},
+        {key: 'Email', sortable: true},
         {key: 'Description'},
         {key: 'TimeCreated', sortable: true},
         {key: 'Status', sortable: true},
