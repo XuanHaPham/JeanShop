@@ -464,7 +464,9 @@ export function requestToken(username, password) {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         body
-    }).catch(catchNetworkError).then(res => res.json());
+    }).catch(catchNetworkError).then(res => 
+      res.json()
+      );
 }
 
 export function openapi(method, route, data, params) {
@@ -483,7 +485,6 @@ export function openapi(method, route, data, params) {
     let options = {
         method: method,
         headers: new Headers({
-            // 'Authorization': 'Bearer ' + getToken(),
             'Content-Type': 'application/json'
         })
     };
@@ -491,8 +492,8 @@ export function openapi(method, route, data, params) {
         options.body = body;
     }
     return fetch(url, options).catch(catchNetworkError).then(res => {
-        console.log(res.headers.get('content-type'))
-        if (res.headers.get('content-type')) {
+        console.log(res.headers.get('Content-Type'))
+        if (res.headers.get('Content-Type')) {
             return res.json();
         } else {
             return res.text();

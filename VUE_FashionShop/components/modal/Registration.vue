@@ -212,7 +212,7 @@
 
 <script>
 import { isValidEmail } from '@/assets/validators';
-
+import axios from 'axios';
 import { base, openapi, methods, routes, setToken, requestToken, register } from '@/store/index.js'
 // export const users = {
 //     address,
@@ -225,6 +225,7 @@ import { base, openapi, methods, routes, setToken, requestToken, register } from
 //   username: ''
 // };
 export default {
+
   name: 'registration',
 
   data () {
@@ -315,7 +316,7 @@ export default {
     //  this.users.dob=this.DOB;
     //  this.users.shippingAddress=this.address1;
 
-      const dataToSend = JSON.stringify({
+      const dataToSend = {
         "address": this.address,
       "dob": this.DOB,
       "email": this.email,
@@ -324,18 +325,58 @@ export default {
        "phoneNumber": this.phone,
        "shippingAddress": this.address1,
   "username": this.name
-        });
-        this.modalTitlemoemodgimstered=dataToSend.phone;
-        openapi(methods.POST, routes.ACCOUNT, this.dataToSend).then(data => {
+        };
+      //   this.modalTitlemoemodgimstered=dataToSend.phone;
+      //   axios.post('http://localhost:8080/accounts',{
+      //     "address": this.address,
+      //     "dob": this.DOB,
+      //     "email": this.email,
+      //     "fullName": this.fullname,
+      //     "password": this.repeatPassword,
+      //   "phoneNumber": this.phone,
+      //   "shippingAddress": this.address1,
+      // "username": this.name
+      //   }).then(response => {
+      // if(response.data.ID !=null){
+
+      //   this.isFormSuccess = true;
+          
+      //   this.$store.commit('setUserName', data.username);
+      //   this.$store.commit('isUserSignedUp', this.isFormSuccess);
+      //   this.$store.commit('isUserLoggedIn', this.isFormSuccess);
+      //   }
+      //   }).catch(error => console.log(error));
+        openapi(methods.POST, routes.ACCOUNT, {
+        "address": this.address,
+      "dob": this.DOB,
+      "email": this.email,
+       "fullName": this.fullname,
+        "password": this.repeatPassword,
+       "phoneNumber": this.phone,
+       "shippingAddress": this.address1,
+        "username": this.name,
+        "status": true
+        }).then(data => {
         this.detailMessage = 'Added successfully!'; 
         // this.items.push(data);
         this.current = data;
+        if(data !=null){
+
         this.isFormSuccess = true;
           
         this.$store.commit('setUserName', data.username);
+        this.$store.commit('setEmail', data.email);
+          this.$store.commit('setPhoneNumber', data.phoneNumber);
+          this.$store.commit('setAddress', data.address);
+          this.$store.commit('setAddress1', data.shippingAddress);
+          this.$store.commit('setDOB', data.dob);
+          this.$store.commit('setFullName', data.fullName);
+          this.$store.commit('setID', data.id);
         this.$store.commit('isUserSignedUp', this.isFormSuccess);
         this.$store.commit('isUserLoggedIn', this.isFormSuccess);
-      });
+        }
+        }
+    );
     // let dataRecieved=""; 
     // fetch("http://localhost:8080/accounts",{credentials:'same-origin',mode:'same-origin',method:"post",body:JSON.stringify(dataToSend)})
     //           .then(resp => {
@@ -355,7 +396,7 @@ export default {
     //         })
             
 
-        this.isFormSuccess = true;
+        // this.isFormSuccess = true;
         // this.$store.commit('setUserName', this.name);
         // this.$store.commit('isUserSignedUp', this.isFormSuccess);
         // this.$store.commit('isUserLoggedIn', this.isFormSuccess);
@@ -504,7 +545,6 @@ export default {
           this.highlightRepeatPasswordWithError = false;
         } else {
           this.highlightRepeatPasswordWithError = true;
-          this.repeatPassword=false;
         }
       } else {
         this.highlightRepeatPasswordWithError = true;

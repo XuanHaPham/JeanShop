@@ -134,7 +134,7 @@ export default {
         this.checkLabel='Logging...';
         requestToken(this.email, this.password).then(data => {
         // this.loading = false;
-        if (data.username != null) {
+        if (data.id != null) {
           // setToken(data);
           this.$store.commit('setUserName', data.username);
           this.$store.commit('setEmail', data.email);
@@ -143,7 +143,7 @@ export default {
           this.$store.commit('setAddress1', data.shippingAddress);
           this.$store.commit('setDOB', data.dob);
           this.$store.commit('setFullName', data.fullName);
-          this.$store.commit('setID', data.ID);
+          this.$store.commit('setID', data.id);
           this.isUserCheckLogin=false;
           this.$store.commit('isUserLoggedIn', this.isFormSuccess);
           // this.$router.push('/');
