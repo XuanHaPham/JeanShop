@@ -32,6 +32,6 @@ public interface AccountApi {
 
     @ApiOperation(tags = {"Account",}, notes = "", value = "Update password")
     @PostMapping("/updatePassword")
-    ResponseEntity<Map<String, Boolean>> updatePassword(@PathVariable("password") String password,@PathVariable("id") Integer id);
+    ResponseEntity<Map<String, Boolean>> updatePassword(@RequestParam("password") String password,@RequestParam("id") Integer id);
 
 }
