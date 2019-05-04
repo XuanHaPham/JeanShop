@@ -27,7 +27,8 @@ public class AccountController implements AccountApi {
 
     @Override
     public ResponseEntity<AccountDTO> update(@RequestBody AccountDTO accountDTO) {
-        return null;
+        AccountDTO result = accountService.update(accountDTO);
+        return ResponseEntity.ok(result);
     }
 
     @Override
