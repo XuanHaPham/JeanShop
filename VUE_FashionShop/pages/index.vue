@@ -4,6 +4,10 @@
     <div class="columns">
       <div class="column is-one-fifth" style="margin-left:20px;">
           <aside class="menu ">
+            
+  <ul class="menu-list">
+    <li><a>All products</a></li>
+  </ul>
   <p class="menu-label">
     CLOTHINGS
   </p>
@@ -25,7 +29,7 @@
     <li><a>Bikinis</a></li>
     <li><a>Cover-ups</a></li>
   </ul>
-  <p class="menu-label">
+  <!-- <p class="menu-label">
     BAGS AND WALLETS
   </p>
   <ul class="menu-list">
@@ -41,7 +45,7 @@
     <li><a>Heels</a></li>
     <li><a>Sandals</a></li>
     <li><a>Sneaker</a></li>
-  </ul>
+  </ul> -->
 </aside>
       </div>
         <div class="column auto">

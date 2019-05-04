@@ -80,6 +80,7 @@ export default {
       highlightEmailWithError: null,
       emailName:'',
       name:'',
+      email:''
     //   noProductLabel: 'Your wishlist is empty'
     }
   },

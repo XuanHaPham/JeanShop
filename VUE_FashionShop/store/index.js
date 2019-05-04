@@ -151,8 +151,16 @@ export const state = () => ({
     isPassword: false,
     isUpdate: false,
     hasSearched: false,
-    name: 'saaaaaa',
-    productTitleSearched: ''
+    ID:'',
+    name: '',
+    productTitleSearched: '',
+    email: '',
+    phoneNumber: '',
+    address: '',
+    fullName: '',
+    dob: '',
+    shippingAddress: '',
+    status: true
   },
   systemInfo: {
     openLoginModal: false,
@@ -191,6 +199,27 @@ export const getters = {
   },
   getUserName: state => {
     return state.userInfo.name;
+  },
+  getID: state => {
+    return state.userInfo.ID;
+  },
+  getAddress: state => {
+    return state.userInfo.address;
+  },
+  getAddress1: state => {
+    return state.userInfo.shippingAddress;
+  },
+  getPhoneNumber: state => {
+    return state.userInfo.phoneNumber;
+  },
+  getDOB: state => {
+    return state.userInfo.dob;
+  },
+  getEmail: state => {
+    return state.userInfo.email;
+  },
+  getFullname: state => {
+    return state.userInfo.fullName;
   },
   isLoginModalOpen: state => {
     return state.systemInfo.openLoginModal;
@@ -257,6 +286,27 @@ export const mutations = {
   setUserName: (state, name) => {
     state.userInfo.name = name;
   },
+  setID: (state,ID) => {
+    state.userInfo.ID = ID;
+  },
+  setAddress: (state, address) => {
+    state.userInfo.address = address;
+  },
+  setAddress1: (state, shippingAddress) => {
+    state.userInfo.shippingAddress = shippingAddress;
+  },
+  setPhoneNumber: (state, phoneNumber) => {
+    state.userInfo.phoneNumber = phoneNumber;
+  },
+  setEmail: (state, email) => {
+    state.userInfo.email = email;
+  },
+  setDOB: (state, dob) => {
+    state.userInfo.dob = dob;
+  },
+  setFullName: (state, fullName) => {
+    state.userInfo.fullName = fullName;
+  },
   setProductTitleSearched: (state, titleSearched) => {
     state.userInfo.productTitleSearched = titleSearched;
   },
@@ -318,7 +368,7 @@ export const actions = {
   }
 } */
 
-export const base = 'http://localhost:8080/'
+export const base = 'http://localhost:8080'
 
 export const methods = {
     GET: 'GET',
@@ -328,7 +378,7 @@ export const methods = {
 }
 
 export const routes = {
-    ACCOUNT: 'Account',
+    ACCOUNT: 'accounts',
     USERS: 'Account/AccountsInRole?role=User',
     ADMINS: 'Account/AccountsInRole?role=Admin',
     COUNTUSERS: 'Account/CountUsers',
@@ -349,14 +399,48 @@ export function getToken() {
     return localStorage.getItem('token');
 }
 
-export function setToken(data) {
-    localStorage.setItem('token', data.access_token);
-    localStorage.setItem('username', data.userName);
-}
+// export function setToken(data) {
+  
+//     localStorage.setItem('ussername', data.username);
+//     localStorage.setItem('token', data.access_token);
+//     localStorage.setItem('email', data.email);
+//     localStorage.setItem('phoneNumber', data.phoneNumber);
+//     localStorage.setItem('address', data.address);
+//     localStorage.setItem('shippingAddress', data.shippingAddress);
+//     localStorage.setItem('fullName', data.fullName);
+//     localStorage.setItem('dob', data.dob);
+    
+    
+// }
 
-export function getUsername() {
-    return localStorage.getItem('username');
-}
+// export function getUsername() {
+//     return localStorage.getItem('username');
+// }
+
+// export function getAddress() {
+//   return localStorage.getItem('address');
+// }
+
+// export function getAddress1() {
+//   return localStorage.getItem('shippingAddress');
+// }
+
+// export function getPhoneNumber() {
+//   return localStorage.getItem('phoneNumber');
+// }
+
+// export function getDOB() {
+//   return localStorage.getItem('dob');
+// }
+
+// export function getEmail() {
+//   return localStorage.getItem('email');
+// }
+
+
+// export function getFullname() {
+//   return localStorage.getItem('fullname');
+// }
 
 export function getAvatar() {
     let username = getUsername();
@@ -374,17 +458,19 @@ export function requestToken(username, password) {
         password
     });
 
-    return fetch(`${base}authencation/checkLogin`, {
+    return fetch(`${base}/authencation/checkLogin`, {
         method: methods.POST,
-        // headers: {
-        //     'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
         body
-    }).catch(catchNetworkError).then(res => res.json());
+    }).catch(catchNetworkError).then(res => 
+      res.json()
+      );
 }
 
 export function openapi(method, route, data, params) {
-    let url = `${base}/api/${route}`;
+    let url = `${base}/${route}`;
     let body = null;
     if (data) {
         if ((method === methods.PUT || method === methods.DELETE) && data.ID) {
@@ -398,17 +484,16 @@ export function openapi(method, route, data, params) {
     }
     let options = {
         method: method,
-        // headers: new Headers({
-        //     'Authorization': 'Bearer ' + getToken(),
-        //     'Content-Type': 'application/json'
-        // })
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
     };
     if (method !== methods.GET) {
         options.body = body;
     }
     return fetch(url, options).catch(catchNetworkError).then(res => {
-        console.log(res.headers.get('content-type'))
-        if (res.headers.get('content-type')) {
+        console.log(res.headers.get('Content-Type'))
+        if (res.headers.get('Content-Type')) {
             return res.json();
         } else {
             return res.text();
@@ -424,4 +509,14 @@ export const urlEncode = data => Object.keys(data)
 export const catchNetworkError = error => {
     alert('Network error. View console logs for more detail!')
     console.error(error);
+}
+
+export function register(user) {
+  const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(user)
+  };
+
+  return fetch(`${base}/accounts`, requestOptions).then(handleResponse);
 }

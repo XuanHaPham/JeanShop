@@ -147,7 +147,7 @@ export default {
       this.detailMessage = 'Adding...';
       openapi(methods.POST, routes.ORGANIZATIONS, this.current).then(data => {
         this.detailMessage = 'Added successfully!';
-        this.items.push(data);
+        // this.items.push(data);
         this.current = data;
         this.hideSuccess();
       });
