@@ -1,7 +1,9 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.persistent.entity.Account;
+import com.example.demo.persistent.entity.AccountRole;
 import com.example.demo.persistent.repository.AccountRepository;
+import com.example.demo.persistent.repository.AccountRoleRepository;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.dto.AccountDTO;
 import org.modelmapper.ModelMapper;
@@ -19,12 +21,13 @@ import java.util.Optional;
 public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository accountRepository;
+    private final AccountRoleRepository accountRoleRepository;
 
 
-    public AccountServiceImpl(AccountRepository accountRepository) {
+    public AccountServiceImpl(AccountRepository accountRepository, AccountRoleRepository accountRoleRepository) {
         this.accountRepository = accountRepository;
+        this.accountRoleRepository = accountRoleRepository;
     }
-
 
     @Override
     public AccountDTO getByUsernameAndPassword(String username, String password) {
@@ -34,6 +37,7 @@ public class AccountServiceImpl implements AccountService {
         }
         ModelMapper modelMapper = new ModelMapper();
         AccountDTO accountDTO = modelMapper.map(account, AccountDTO.class);
+        accountDTO.setRoleID(accountRoleRepository.getRoleIDByAccountID(account.getId()));
         return accountDTO;
     }
 
@@ -61,7 +65,12 @@ public class AccountServiceImpl implements AccountService {
         ModelMapper modelMapper = new ModelMapper();
         Account account = modelMapper.map(accountDTO, Account.class);
         account = accountRepository.save(account);
+        AccountRole accountRole = new AccountRole();
+        accountRole.setRoleID(1);
+        accountRole.setAccountID(account.getId());
+        accountRoleRepository.save(accountRole);
         AccountDTO dto = modelMapper.map(account, AccountDTO.class);
+        dto.setRoleID(1);
         return dto;
     }
 

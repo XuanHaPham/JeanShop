@@ -60,7 +60,7 @@ export default {
       this.color = 'unset';
       requestToken(this.username, this.password).then(data => {
         this.loading = false;
-        if (data.access_token) {
+        if (data.access_token != null) {
           setToken(data);
           this.message = 'Login successful. Redirecting to dashboard...';
           this.color = 'green';
