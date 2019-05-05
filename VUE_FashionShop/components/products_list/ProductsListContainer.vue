@@ -26,7 +26,11 @@ export default {
       productsFiltered: []
     };
   },
-
+  // mounted(){
+  //   this.$nextTick(){
+  //     axios.get().then(response => products = response.data)
+  //   }
+  // },
   computed: {
     products () {
       if (this.$store.state.userInfo.hasSearched) {

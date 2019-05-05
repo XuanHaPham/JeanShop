@@ -121,7 +121,7 @@
             <div v-if="isUserUpdate" class="level">
               <div class="level-item has-text-centered">
                 <div>
-                  <p class="title">Update Successful</p>
+                  <p class="title">{{ notiLable }}</p>
                 </div>
               </div>
             </div>
@@ -138,11 +138,13 @@
 <script>
 import { isValidEmail } from '@/assets/validators';
 
+import { base, openapi, methods, routes, setToken, requestToken, register } from '@/store/index.js'
 export default {
   name: 'registration',
 
   data () {
     return {
+      notiLable:'Update Successful',
       modalTitle: 'Update Profile',
       modalTitleRegistered: 'Update ',
       primaryBtnLabel: 'Update',
@@ -174,6 +176,13 @@ export default {
       fullname:'',
       DOB:'',
       phone:'',
+      //  name: $store.getters.getUserName,
+      // email: $store.getters.getEmail,
+      // address:$store.getters.getAddress,
+      // address1:$store.getters.getAddress1,
+      // fullname:$store.getters.getFullName,
+      // DOB:$store.getters.getDOB,
+      // phone:$store.getters.getPhoneNumber,
       highlightFullNameWithError: null,
       highlightNameWithError: null,
       highlightDOBWithError: null,
@@ -191,6 +200,16 @@ export default {
     isUserUpdate () {
       return this.$store.getters.isUserUpdate;
     },
+
+    getID () {
+			let name = this.$store.getters.getID;
+			
+			if (name === '') {
+				return 'user';
+			} else {
+				return name;
+			}
+    },
     openModal () {
       if (this.$store.getters.isUpdateModalOpen) {
         return true;
@@ -204,7 +223,8 @@ export default {
     closeModal () {
       this.$store.commit('isUserUpdate', false);
 	  this.$store.commit('showUpdateModal', false);
-	  this.isFormSuccess = false;
+    this.isFormSuccess = false;
+    this.notiLable='Update Successful';
     },
     checkForm (e) {
       e.preventDefault();
@@ -216,11 +236,30 @@ export default {
         this.highlightAddressWithError=false;
         this.highlightAddress1WithError= false;
         this.highlightPhoneWithError=false;
-        
+
+        openapi(methods.PUT, routes.ACCOUNT, {
+        "address": this.address,
+        "dob": this.DOB,
+        "fullName": this.fullname,
+        "phoneNumber": this.phone,
+        "shippingAddress": this.address1,
+        "id": this.getID
+        }).then(data => {
+        if(data.id !=null){
+
         this.isFormSuccess = true;
-        // this.$store.commit('setUserName', this.name);
-        this.$store.commit('isUserUpdate', this.isFormSuccess);
-        // this.$store.commit('isUserLoggedIn', this.isFormSuccess);
+          
+          this.$store.commit('setPhoneNumber', this.phone);
+          this.$store.commit('setAddress', this.address);
+          this.$store.commit('setAddress1', this.address1);
+          this.$store.commit('setDOB', this.DOB);
+          this.$store.commit('setFullName', this.fullName);
+          this.$store.commit('isUserUpdate', this.isFormSuccess);
+        }
+        else this.notiLable='Update Fail';
+        }
+        
+    );
       }
 
       if (!this.fullname) {

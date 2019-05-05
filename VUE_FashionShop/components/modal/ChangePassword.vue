@@ -13,20 +13,19 @@
               <div class="field">
                 <p class="control has-icons-left has-icons-right">
                   <input
-                    :class="[highlightPasswordWithError ? 'input is-danger' : 'input']"
+                    :class="[highlightOldPasswordWithError ? 'input is-danger' : 'input']"
                     type="password"
                     :placeholder="oldpasswordPlaceholder"
                     v-model="oldpassword"
-                    @keyup="checkOldPasswordOnKeyUp(oldpassword)"
                   >
                   <span class="icon is-small is-left">
                     <i class="fa fa-lock"></i>
                   </span>
-                  <span v-if="highlightPasswordWithError !== null" class="icon is-small is-right">
-                    <i :class="[highlightPasswordWithError ? 'fa fa-exclamation-circle' : 'fa fa-check']"></i>
+                  <span v-if="highlightOldPasswordWithError !== null" class="icon is-small is-right">
+                    <i :class="[highlightOldPasswordWithError ? 'fa fa-exclamation-circle' : 'fa fa-check']"></i>
                   </span>
                 </p>
-                <p v-if="highlightPasswordWithError" class="help is-danger">{{ passwordErrorLabel }}</p>
+                <p v-if="highlightOldPasswordWithError" class="help is-danger">{{ oldpasswordErrorLabel }}</p>
               </div>
               
 
@@ -108,6 +107,7 @@ export default {
       repeatPasswordPlaceholder: 'Repeat Password*',
       DOBPlaceholder:"Birthday*",
       phonePlaceholder:"Phone Number",
+      oldpasswordErrorLabel:"Wrong Password",
       notEqualErrorLabel: 'Passwords must be equal',
       passwordErrorLabel: 'Password required',
       nameErrorLabel: 'Username required',
@@ -145,6 +145,24 @@ export default {
     isUserPassword () {
       return this.$store.getters.isUserPassword;
     },
+    getPassword () {
+			let name = this.$store.getters.getUserName;
+			
+			if (name === '') {
+				return 'user';
+			} else {
+				return name;
+			}
+    },
+    getID () {
+			let name = this.$store.getters.getID;
+			
+			if (name === '') {
+				return 'user';
+			} else {
+				return name;
+			}
+    },
     openModal () {
       if (this.$store.getters.isPasswordModalOpen) {
         return true;
@@ -169,17 +187,29 @@ export default {
         this.highlightOldPasswordWithError = false;
         this.highlightRepeatPasswordWithError = false;
         this.isFormSuccess = true;
+
+      if(this.oldpassword == this.getPassword){
+      openapi(methods.PUT, routes.ACCOUNT, {
+        "password": this.password,
+        "id": this.getID
+        }).then(data => {
+        if(data.id !=null){
+          
+          this.$store.commit('isUserPassword', this.isFormSuccess);
+          this.$store.commit('setPassword', this.password);
+        }
+        else this.notiLable='Update Fail';
+        });
+      }
+      else this.highlightOldPasswordWithError= true;
+
+
+
         // this.$store.commit('setUserName', this.name);
-        this.$store.commit('isUserPassword', this.isFormSuccess);
         // this.$store.commit('isUserLoggedIn', this.isFormSuccess);
       }
 
       
-        if (!this.oldpassword) {
-        this.highlightPasswordWithError = true;
-      } else {
-        this.highlightPasswordWithError = false;
-      }
 
       if (!this.password) {
         this.highlightPasswordWithError = true;

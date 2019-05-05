@@ -159,6 +159,7 @@ export const state = () => ({
     address: '',
     fullName: '',
     dob: '',
+    password:'',
     shippingAddress: '',
     status: true
   },
@@ -202,6 +203,9 @@ export const getters = {
   },
   getID: state => {
     return state.userInfo.ID;
+  },
+  getPassword: state => {
+    return state.userInfo.password;
   },
   getAddress: state => {
     return state.userInfo.address;
@@ -285,6 +289,9 @@ export const mutations = {
   },
   setUserName: (state, name) => {
     state.userInfo.name = name;
+  },
+  setPassword: (state, password) => {
+    state.userInfo.password = password;
   },
   setID: (state,ID) => {
     state.userInfo.ID = ID;
@@ -377,6 +384,13 @@ export const methods = {
     DELETE: 'DELETE'
 }
 
+export function _parseJSON(response) {
+  return response.text().then(function(text) {
+    return text ? JSON.parse(text) : {}
+  })
+}
+
+
 export const routes = {
     ACCOUNT: 'accounts',
     USERS: 'Account/AccountsInRole?role=User',
@@ -465,7 +479,8 @@ export function requestToken(username, password) {
         },
         body
     }).catch(catchNetworkError).then(res => 
-      res.json()
+      // res.json()
+      _parseJSON(res)
       );
 }
 
@@ -473,8 +488,8 @@ export function openapi(method, route, data, params) {
     let url = `${base}/${route}`;
     let body = null;
     if (data) {
-        if ((method === methods.PUT || method === methods.DELETE) && data.ID) {
-            url += `/${data.ID}`;
+        if ((method === methods.PUT || method === methods.DELETE) && data.id) {
+            url += `/${data.id}`;
         }
         Object.keys(data).forEach((key) => (data[key] == null) && delete data[key]);
         body = JSON.stringify(data);
