@@ -87,6 +87,7 @@
 
 <script>
 import { isValidEmail } from '@/assets/validators';
+import { base, openapi, methods, routes, setToken, requestToken } from '@/store/index.js'
 
 export default {
   name: 'registration',
@@ -146,7 +147,7 @@ export default {
       return this.$store.getters.isUserPassword;
     },
     getPassword () {
-			let name = this.$store.getters.getUserName;
+			let name = this.$store.getters.getPassword;
 			
 			if (name === '') {
 				return 'user';
@@ -177,6 +178,8 @@ export default {
       this.$store.commit('isUserPassword', false);
       this.$store.commit('showPasswordModal', false);
       this.isFormSuccess = false;
+      
+      this.modalTitle= 'Change Password';
     },
     checkForm (e) {
       e.preventDefault();
@@ -189,8 +192,8 @@ export default {
         this.isFormSuccess = true;
 
       if(this.oldpassword == this.getPassword){
-      openapi(methods.PUT, routes.ACCOUNT, {
-        "password": this.password,
+      openapi(methods.POST, routes.PASSWORD, {
+        "password": this.repeatPassword,
         "id": this.getID
         }).then(data => {
         if(data.id !=null){
@@ -198,7 +201,7 @@ export default {
           this.$store.commit('isUserPassword', this.isFormSuccess);
           this.$store.commit('setPassword', this.password);
         }
-        else this.notiLable='Update Fail';
+        else this.modalTitle="Change Password Fail";
         });
       }
       else this.highlightOldPasswordWithError= true;

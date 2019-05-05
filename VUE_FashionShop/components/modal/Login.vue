@@ -143,6 +143,7 @@ export default {
           this.$store.commit('setAddress1', data.shippingAddress);
           this.$store.commit('setDOB', data.dob);
           this.$store.commit('setFullName', data.fullName);
+          this.$store.commit('setPassword', this.password);
           this.$store.commit('setID', data.id);
           this.isUserCheckLogin=false;
           this.$store.commit('isUserLoggedIn', this.isFormSuccess);

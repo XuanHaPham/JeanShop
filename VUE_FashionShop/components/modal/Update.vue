@@ -253,7 +253,7 @@ export default {
           this.$store.commit('setAddress', this.address);
           this.$store.commit('setAddress1', this.address1);
           this.$store.commit('setDOB', this.DOB);
-          this.$store.commit('setFullName', this.fullName);
+          this.$store.commit('setFullName', this.fullname);
           this.$store.commit('isUserUpdate', this.isFormSuccess);
         }
         else this.notiLable='Update Fail';

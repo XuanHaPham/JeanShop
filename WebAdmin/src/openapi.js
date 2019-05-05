@@ -1,4 +1,4 @@
-export const base = 'http://localhost:54512'
+export const base = 'http://localhost:8080'
 
 export const methods = {
     GET: 'GET',
@@ -6,6 +6,12 @@ export const methods = {
     PUT: 'PUT',
     DELETE: 'DELETE'
 }
+
+export function _parseJSON(response) {
+    return response.text().then(function(text) {
+      return text ? JSON.parse(text) : {}
+    })
+  }
 
 export const routes = {
     ACCOUNT: 'Account',
@@ -57,10 +63,13 @@ export function requestToken(username, password) {
     return fetch(`${base}/Token`, {
         method: methods.POST,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+            'Content-Type': 'application/x-www-form-urlencoded'
         },
         body
-    }).catch(catchNetworkError).then(res => res.json());
+    }).catch(catchNetworkError).then(res => 
+        // res.json()
+        _parseJSON(res)
+        );
 }
 
 export function openapi(method, route, data, params) {
@@ -79,7 +88,7 @@ export function openapi(method, route, data, params) {
     let options = {
         method: method,
         headers: new Headers({
-            'Authorization': 'Bearer ' + getToken(),
+            // 'Authorization': 'Bearer ' + getToken(),
             'Content-Type': 'application/json'
         })
     };
@@ -87,8 +96,8 @@ export function openapi(method, route, data, params) {
         options.body = body;
     }
     return fetch(url, options).catch(catchNetworkError).then(res => {
-        console.log(res.headers.get('content-type'))
-        if (res.headers.get('content-type')) {
+        console.log(res.headers.get('Content-Type'))
+        if (res.headers.get('Content-Type')) {
             return res.json();
         } else {
             return res.text();

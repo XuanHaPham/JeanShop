@@ -372,6 +372,7 @@ export default {
           this.$store.commit('setDOB', data.dob);
           this.$store.commit('setFullName', data.fullName);
           this.$store.commit('setID', data.id);
+          this.$store.commit('setPassword', this.password);
         this.$store.commit('isUserSignedUp', this.isFormSuccess);
         this.$store.commit('isUserLoggedIn', this.isFormSuccess);
         }

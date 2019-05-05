@@ -393,7 +393,7 @@ export function _parseJSON(response) {
 
 export const routes = {
     ACCOUNT: 'accounts',
-    USERS: 'Account/AccountsInRole?role=User',
+    PASSWORD: 'accounts/updatePassword',
     ADMINS: 'Account/AccountsInRole?role=Admin',
     COUNTUSERS: 'Account/CountUsers',
     USERINFO: 'Account/UserInfo',
@@ -488,9 +488,9 @@ export function openapi(method, route, data, params) {
     let url = `${base}/${route}`;
     let body = null;
     if (data) {
-        if ((method === methods.PUT || method === methods.DELETE) && data.id) {
-            url += `/${data.id}`;
-        }
+        // if ((method === methods.PUT || method === methods.DELETE) && data.id) {
+        //     url += `/${data.id}`;
+        // }
         Object.keys(data).forEach((key) => (data[key] == null) && delete data[key]);
         body = JSON.stringify(data);
     }
