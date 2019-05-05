@@ -1,8 +1,10 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.persistent.entity.CyberGaming;
 import com.example.demo.persistent.entity.Product;
 import com.example.demo.persistent.repository.ProductRepository;
 import com.example.demo.service.ProductService;
+import com.example.demo.service.dto.CyberGamingDTO;
 import com.example.demo.service.dto.ProductDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -64,10 +66,23 @@ public class ProductServiceImpl implements ProductService {
         ProductDTO productDTO = modelMapper.map(product, ProductDTO.class);
         return productDTO;
     }
-//    @Override
-//    ProductDTO insert(ProductDTO productDTO){}
-//
-//    @Override
-//    ProductDTO update(ProductDTO productDTO){}
+    @Override
+    public ProductDTO insert(ProductDTO productDTO){
+        ModelMapper modelMapper = new ModelMapper();
+        Product product = modelMapper.map(productDTO, Product.class);
+        product = productRepository.save(product);
+        ProductDTO dto = modelMapper.map(product, ProductDTO.class);
+        return dto;
+    }
+
+    @Override
+    public ProductDTO update(ProductDTO productDTO){
+        Optional.ofNullable(productRepository.findById(productDTO.getId())).orElseThrow(() -> new EntityNotFoundException());
+        ModelMapper modelMapper = new ModelMapper();
+        Product product = modelMapper.map(productDTO, Product.class);
+        product = productRepository.saveAndFlush(product);
+        ProductDTO dto = modelMapper.map(product, ProductDTO.class);
+        return dto;
+    }
 
 }

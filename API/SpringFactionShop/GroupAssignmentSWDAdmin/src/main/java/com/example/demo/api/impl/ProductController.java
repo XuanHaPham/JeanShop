@@ -5,15 +5,14 @@ import com.example.demo.service.ProductService;
 import com.example.demo.service.dto.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ProductController implements ProductApi {
     @Autowired
@@ -43,5 +42,17 @@ public class ProductController implements ProductApi {
     public ResponseEntity<ProductDTO> findByID(@PathVariable("id") Integer id){
         ProductDTO productDTO = productService.findByID(id);
         return ResponseEntity.ok(productDTO);
+    }
+
+    @Override
+    public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO productDTO) {
+        ProductDTO dto = productService.insert(productDTO);
+        return ResponseEntity.ok(dto);
+    }
+
+    @Override
+    public ResponseEntity<ProductDTO> update(@RequestBody ProductDTO productDTO) {
+        ProductDTO dto = productService.update(productDTO);
+        return ResponseEntity.ok(dto);
     }
 }

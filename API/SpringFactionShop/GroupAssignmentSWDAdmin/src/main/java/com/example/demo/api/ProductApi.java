@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Component
 @RequestMapping("/products")
 public interface ProductApi {
@@ -22,9 +23,17 @@ public interface ProductApi {
 
     @ApiOperation(tags = {"Product",}, notes = "", value = "Delete product by ID")
     @PostMapping("/deleteByID")
-    ResponseEntity<Map<String, Boolean>> deleteByID(@PathVariable("id") Integer id);
+    ResponseEntity<Map<String, Boolean>> deleteByID(@RequestParam("id") Integer id);
 
     @ApiOperation(tags = {"Product",}, notes = "", value = "Get product by ID")
     @GetMapping("/findByID")
-    ResponseEntity<ProductDTO> findByID(@PathVariable("id") Integer id);
+    ResponseEntity<ProductDTO> findByID(@RequestParam("id") Integer id);
+
+    @ApiOperation(tags = {"Product",}, notes = "", value = "insert product")
+    @PostMapping("")
+    ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO productDTO);
+
+    @ApiOperation(tags = {"Product",}, notes = "", value = "update product")
+    @PutMapping("")
+    ResponseEntity<ProductDTO> update(@RequestBody ProductDTO productDTO);
 }

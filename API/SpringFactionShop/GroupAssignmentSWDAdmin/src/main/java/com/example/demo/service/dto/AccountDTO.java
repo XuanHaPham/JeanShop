@@ -14,7 +14,7 @@ public class AccountDTO implements Serializable {
 
     private  String email;
 
-    private int phoneNumber;
+    private String phoneNumber;
 
     private String address;
 
@@ -24,7 +24,7 @@ public class AccountDTO implements Serializable {
 
     private String shippingAddress;
 
-    private Boolean status;
+    private Integer roleID;
 
     public Integer getId() {
         return id;
@@ -58,11 +58,11 @@ public class AccountDTO implements Serializable {
         this.email = email;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -98,11 +98,11 @@ public class AccountDTO implements Serializable {
         this.shippingAddress = shippingAddress;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public Integer getRoleID() {
+        return roleID;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setRoleID(Integer roleID) {
+        this.roleID = roleID;
     }
 }

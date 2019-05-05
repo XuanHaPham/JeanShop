@@ -15,4 +15,6 @@ public interface AccountService {
     AccountDTO insert(AccountDTO accountDTO);
 
     AccountDTO update(AccountDTO accountDTO);
+
+    Boolean updatePassword(String  password, Integer id);
 }

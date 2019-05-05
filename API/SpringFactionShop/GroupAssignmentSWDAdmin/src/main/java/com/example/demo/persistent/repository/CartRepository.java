@@ -11,13 +11,12 @@ import java.util.List;
 
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Integer> {
-    @Query("SELECT a FROM Account a WHERE a.username = :username AND a.password = :password AND a.status = false")
-    Cart findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+    @Query("SELECT c FROM Cart c WHERE c.accountID = :accountID AND c.status = true")
+    List<Cart> getCartByAccountID(@Param("accountID") Integer accountID);
 
-    @Query("SELECT a FROM Account a WHERE a.status = false ")
-    List<Cart> findAllByIsDelete();
-
-    @Query("UPDATE Account a SET a.status = false WHERE a.id = :id")
+    @Query("UPDATE Cart c SET c.status = false WHERE c.id = :id")
     @Modifying
     void deleteByID(Integer id);
+
+
 }
