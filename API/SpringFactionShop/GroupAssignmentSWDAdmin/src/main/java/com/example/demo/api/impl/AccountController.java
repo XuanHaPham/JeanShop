@@ -5,10 +5,7 @@ import com.example.demo.service.AccountService;
 import com.example.demo.service.dto.AccountDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +37,7 @@ public class AccountController implements AccountApi {
     }
 
     @Override
-    public ResponseEntity<Map<String, Boolean>> delete(@PathVariable("id") Integer id) {
+    public ResponseEntity<Map<String, Boolean>> delete(@RequestParam("id") Integer id) {
         Boolean result = accountService.delete(id);
         Map<String, Boolean> resul = new HashMap<>();
         resul.put("Content", result);
@@ -48,8 +45,8 @@ public class AccountController implements AccountApi {
     }
 
     @Override
-    public ResponseEntity<Map<String, Boolean>> updatePassword(@PathVariable("password") String password,
-                                                               @PathVariable("id") Integer id){
+    public ResponseEntity<Map<String, Boolean>> updatePassword(@RequestParam("password") String password,
+                                                               @RequestParam("id") Integer id){
         Boolean result = accountService.updatePassword(password, id);
         Map<String , Boolean> resul = new HashMap<>();
         resul.put("Content", result);
