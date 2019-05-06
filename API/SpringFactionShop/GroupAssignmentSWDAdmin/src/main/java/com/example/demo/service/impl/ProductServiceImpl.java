@@ -32,8 +32,12 @@ public class ProductServiceImpl implements ProductService {
         List<ProductDTO> productDTOS = new ArrayList<>();
         ModelMapper modelMapper = new ModelMapper();
         for (Product pro : products ) {
-            productDTOS.add(modelMapper.map(pro, ProductDTO.class));
-
+            ProductDTO productDTO = modelMapper.map(pro, ProductDTO.class);
+            productDTO.setAddedToCart(false);
+            productDTO.setBuyquantity(1);
+            productDTO.setAddedBtn(false);
+            productDTO.setFavourite(false);
+            productDTOS.add(productDTO);
         }
         return productDTOS;
     }

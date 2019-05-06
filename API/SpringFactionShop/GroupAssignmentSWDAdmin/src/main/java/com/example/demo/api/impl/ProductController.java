@@ -31,7 +31,7 @@ public class ProductController implements ProductApi {
     }
 
     @Override
-    public ResponseEntity<Map<String, Boolean>> deleteByID(@PathVariable("id") Integer id){
+    public ResponseEntity<Map<String, Boolean>> delete(@PathVariable("id") Integer id) {
         Boolean result = productService.deleteByID(id);
         Map<String, Boolean> resul = new HashMap<>();
         resul.put("Content", result);

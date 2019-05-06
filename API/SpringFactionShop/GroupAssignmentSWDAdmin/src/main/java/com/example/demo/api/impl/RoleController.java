@@ -1,8 +1,8 @@
 package com.example.demo.api.impl;
 
-import com.example.demo.api.FeedbackApi;
-import com.example.demo.service.FeedbackService;
-import com.example.demo.service.dto.FeedbackDTO;
+import com.example.demo.api.RoleAPI;
+import com.example.demo.service.RoleService;
+import com.example.demo.service.dto.RoleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,28 +16,28 @@ import java.util.Map;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-public class FeedbackController implements FeedbackApi {
+public class RoleController implements RoleAPI {
 
     @Autowired
-    FeedbackService feedbackService;
+    RoleService roleService;
 
     @Override
-    public ResponseEntity<List<FeedbackDTO>> getAll(){
-        List<FeedbackDTO> feedbackDTOS= feedbackService.getAll();
-        return ResponseEntity.ok(feedbackDTOS);
+    public ResponseEntity<RoleDTO> insert(@RequestBody RoleDTO roleDTO){
+        RoleDTO dto = roleService.insert(roleDTO);
+        return ResponseEntity.ok(dto);
     }
 
     @Override
     public ResponseEntity<Map<String, Boolean>> delete(@PathVariable("id") Integer id){
-        Boolean result = feedbackService.deleteByID(id);
+        Boolean result = roleService.delete(id);
         Map<String, Boolean> resul = new HashMap<>();
         resul.put("Content", result);
         return ResponseEntity.ok(resul);
     }
 
     @Override
-    public ResponseEntity<FeedbackDTO> insert(@RequestBody FeedbackDTO feedbackDTO){
-        FeedbackDTO dto = feedbackService.insert(feedbackDTO);
-        return ResponseEntity.ok(dto);
+    public ResponseEntity<List<RoleDTO>> getAll(){
+        List<RoleDTO> roleDTOS = roleService.getAll();
+        return ResponseEntity.ok(roleDTOS);
     }
 }

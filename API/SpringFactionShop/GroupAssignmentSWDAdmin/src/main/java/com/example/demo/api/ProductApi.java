@@ -22,8 +22,8 @@ public interface ProductApi {
     ResponseEntity<List<ProductDTO>> findByCategoryID(@RequestParam("categoryID") Integer categoryID);
 
     @ApiOperation(tags = {"Product",}, notes = "", value = "Delete product by ID")
-    @PostMapping("/deleteByID")
-    ResponseEntity<Map<String, Boolean>> deleteByID(@RequestParam("id") Integer id);
+    @DeleteMapping("/{id}")
+    ResponseEntity<Map<String, Boolean>> delete(@PathVariable("id") Integer id);
 
     @ApiOperation(tags = {"Product",}, notes = "", value = "Get product by ID")
     @GetMapping("/findByID")

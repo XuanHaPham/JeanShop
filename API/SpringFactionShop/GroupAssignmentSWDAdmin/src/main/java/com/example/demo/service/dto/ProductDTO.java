@@ -4,11 +4,24 @@ import javax.persistence.Column;
 import java.util.Date;
 
 public class ProductDTO {
+
+    //isAddedToCart: false,
+    //isAddedBtn: false,
+    //isFavourite: false,
+
     private Integer id;
 
     private Integer categoryID;
 
     private Integer accountID;
+
+    private Boolean isAddedToCart;
+
+    private Boolean isAddedBtn;
+
+    private Boolean isFavourite;
+
+    private Integer buyquantity;
 
     private String size;
 
@@ -27,6 +40,39 @@ public class ProductDTO {
     private Date timeCreated;
 
     private Boolean status;
+
+
+    public Boolean getAddedToCart() {
+        return isAddedToCart;
+    }
+
+    public void setAddedToCart(Boolean addedToCart) {
+        isAddedToCart = addedToCart;
+    }
+
+    public Boolean getAddedBtn() {
+        return isAddedBtn;
+    }
+
+    public void setAddedBtn(Boolean addedBtn) {
+        isAddedBtn = addedBtn;
+    }
+
+    public Boolean getFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(Boolean favourite) {
+        isFavourite = favourite;
+    }
+
+    public Integer getBuyquantity() {
+        return buyquantity;
+    }
+
+    public void setBuyquantity(Integer buyquantity) {
+        this.buyquantity = buyquantity;
+    }
 
     public Integer getId() {
         return id;

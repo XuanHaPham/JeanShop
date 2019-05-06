@@ -16,7 +16,7 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
 
     @Query("UPDATE Cart c SET c.status = false WHERE c.id = :id")
     @Modifying
-    void deleteByID(Integer id);
+    void deleteByID(@Param("id") Integer id);
 
 
 }

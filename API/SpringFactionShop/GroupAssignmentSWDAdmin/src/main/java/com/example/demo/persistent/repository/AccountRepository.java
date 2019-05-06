@@ -18,12 +18,15 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
     @Query("SELECT a FROM Account a WHERE a.id = :id AND a.status = true")
     Account findAccountById(@Param("id") Integer id);
 
+    @Query("SELECT a.email FROM Account a WHERE a.id = :id")
+    String getEmailByID(@Param("id") Integer id);
+
     @Query("SELECT a FROM Account a WHERE a.status = true")
     List<Account> findAllByIsDelete();
 
     @Query("UPDATE Account a SET a.status = false WHERE a.id = :id")
     @Modifying
-    void deleteByID(Integer id);
+    void deleteByID(@Param("id") Integer id);
 
     @Query("UPDATE Account a SET a.password = :password WHERE a.id = :id")
     @Modifying

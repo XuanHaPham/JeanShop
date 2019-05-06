@@ -5,11 +5,13 @@ import java.util.Date;
 public class FeedbackDTO {
     private Integer id;
 
-    private int accountID;
+    private String  email;
 
     private String description;
 
     private Date timeCreated;
+
+    private int accountID;
 
     private boolean status;
 
@@ -27,6 +29,14 @@ public class FeedbackDTO {
 
     public void setAccountID(int accountID) {
         this.accountID = accountID;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getDescription() {

@@ -19,8 +19,8 @@ public interface FeedbackApi {
     ResponseEntity<List<FeedbackDTO>> getAll();
 
     @ApiOperation(tags = {"Feedback",}, notes = "", value = "delete feedback by id")
-    @PutMapping("/DeleteByID")
-    ResponseEntity<Map<String, Boolean>> deleteByID(@RequestParam("id") Integer id);
+    @DeleteMapping("{id}")
+    ResponseEntity<Map<String, Boolean>> delete(@PathVariable("id") Integer id);
 
     @ApiOperation(tags = {"Feedback",}, notes = "", value = "get all feedback")
     @PostMapping("")

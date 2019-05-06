@@ -37,7 +37,7 @@ public class AccountController implements AccountApi {
     }
 
     @Override
-    public ResponseEntity<Map<String, Boolean>> delete(@RequestParam("id") Integer id) {
+    public ResponseEntity<Map<String, Boolean>> delete(@PathVariable("id") Integer id) {
         Boolean result = accountService.delete(id);
         Map<String, Boolean> resul = new HashMap<>();
         resul.put("Content", result);
