@@ -79,6 +79,11 @@ public class AccountServiceImpl implements AccountService {
         Optional.ofNullable(accountRepository.findById(accountDTO.getId())).orElseThrow(() -> new EntityNotFoundException());
         ModelMapper modelMapper = new ModelMapper();
         Account account = modelMapper.map(accountDTO, Account.class);
+        Account accountFlag = accountRepository.findAccountById(account.getId());
+        account.setPassword(accountFlag.getPassword());
+        account.setEmail(accountFlag.getEmail());
+        account.setStatus(accountFlag.getStatus());
+        account.setUsername(accountFlag.getUsername());
         account = accountRepository.saveAndFlush(account);
         AccountDTO dto = modelMapper.map(account, AccountDTO.class);
         return dto;

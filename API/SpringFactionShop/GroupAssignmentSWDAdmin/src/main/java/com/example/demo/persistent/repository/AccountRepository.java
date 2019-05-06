@@ -15,6 +15,9 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
     @Query("SELECT a FROM Account a WHERE a.email = :username AND a.password = :password AND a.status = true")
     Account findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 
+    @Query("SELECT a FROM Account a WHERE a.id = :id AND a.status = true")
+    Account findAccountById(@Param("id") Integer id);
+
     @Query("SELECT a FROM Account a WHERE a.status = false ")
     List<Account> findAllByIsDelete();
 
