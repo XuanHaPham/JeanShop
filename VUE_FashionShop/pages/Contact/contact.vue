@@ -7,6 +7,8 @@
         <h3 class="title is-3" >{{ pageTitle }}</h3>
       </div>
       <br>
+      
+        <form @submit="checkForm" action="#" method="post">
 			<div class="field">
 						<label class="label">Your name</label>
               <div class="control">
@@ -40,14 +42,15 @@
 
             <div class="field is-group	ed has-text-centered">
               <div class="control">
-                <button class="button is-link is-large"><span class="icon">
+                <button class="button is-link is-large" type="submit" ><span class="icon">
                     <i class="fa fa-envelope"></i>
                   </span> 
                   <span>Submit</span></button>
               </div>
             </div>
+            
+				</form>
         </div>
-				
 			<div class="column ">
 			 <div class="section-heading" style="text-align:center"> 
         <h3 class="title is-3" >CONTACT US</h3>

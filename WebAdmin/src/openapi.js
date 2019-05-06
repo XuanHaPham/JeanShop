@@ -14,8 +14,8 @@ export function _parseJSON(response) {
   }
 
 export const routes = {
-    ACCOUNT: 'Account',
-    USERS: 'Account/AccountsInRole?role=User',
+    ACCOUNT: 'accounts',
+    USERS: 'accounts',
     ADMINS: 'Account/AccountsInRole?role=Admin',
     COUNTUSERS: 'Account/CountUsers',
     USERINFO: 'Account/UserInfo',
@@ -36,8 +36,8 @@ export function getToken() {
 }
 
 export function setToken(data) {
-    localStorage.setItem('token', data.access_token);
-    localStorage.setItem('username', data.userName);
+    localStorage.setItem('token', data.id);
+    localStorage.setItem('username', data.username);
 }
 
 export function getUsername() {
@@ -55,12 +55,12 @@ export function clearToken() {
 
 export function requestToken(username, password) {
     const body = urlEncode({
-        grant_type: 'password',
+        // grant_type: 'password',
         username,
         password
     });
 
-    return fetch(`${base}/Token`, {
+    return fetch(`${base}/authencation/checkLogin`, {
         method: methods.POST,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -73,7 +73,7 @@ export function requestToken(username, password) {
 }
 
 export function openapi(method, route, data, params) {
-    let url = `${base}/api/${route}`;
+    let url = `${base}/${route}`;
     let body = null;
     if (data) {
         if ((method === methods.PUT || method === methods.DELETE) && data.ID) {

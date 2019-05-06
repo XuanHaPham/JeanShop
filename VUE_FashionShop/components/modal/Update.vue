@@ -127,7 +127,7 @@
             </div>
           </section>
           <footer class="modal-card-foot">
-            <button v-if="!isUserUpdate" class="button is-success">{{ primaryBtnLabel }}</button>
+            <button v-if="!isUserUpdate"  class="button is-success">{{ primaryBtnLabel }}</button>
             <button v-if="isUserUpdate" type="button" class="button is-info" @click="closeModal">{{ btnRegisteredLabel }}</button>
           </footer>
         </form>

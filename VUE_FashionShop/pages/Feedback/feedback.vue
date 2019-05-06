@@ -20,22 +20,28 @@
       <div class="columns">
         <div class="column is-6 is-offset-3">
          
-
+        <form @submit="checkForm" action="#" method="post">
             <div class="field">
               <label class="label">Message</label>
               <div class="control">
-                <textarea class="textarea" placeholder="Textarea"></textarea>
+                <textarea class="textarea" placeholder="Textarea" v-model="feedback"
+                    @keyup="checkFeedbackOnKeyUp(feedback)"></textarea>
               </div>
+                  <span v-if="highlightFeedbackWithError !== null" class="icon is-small is-right">
+                    <i :class="[highlightFeedbackWithError ? 'fa fa-exclamation-circle' : 'fa fa-check']"></i>
+                  </span>
             </div>
 
             <div class="field is-grouped has-text-centered">
               <div class="control">
-                <button class="button is-link is-large"><span class="icon">
+                <button type="submit" class="button is-link is-large"><span class="icon">
                     <i class="fa fa-envelope"></i>
                   </span>
                   <span>Submit</span></button>
               </div>
             </div>
+
+            </form>
         </div>
       </div>
 
@@ -47,44 +53,80 @@
 <script>
 import VmProductsList from '@/components/Products';
 import { getByTitle } from '@/assets/filters';
+import { base, openapi, methods, routes, setToken, requestToken } from '@/store/index.js'
 import { METHODS } from 'http';
-import { isValidEmail } from '@/assets/validators';
 export default {
 	name: 'feedback',
 	data () {
     return {
       pageTitle: 'Feedback Us',
-      emailPlaceholder: 'Your email',
+      feedbackPlaceholder: 'Your feedback',
+      highlightFeedbackWithError: null,
+      feedback:''
     //   noProductLabel: 'Your wishlist is empty'
     }
   },
+ 
  methods: {
     checkForm (e) {
       e.preventDefault();
 
+if (this.feedback) {
+        
+        this.highlightFeedbackWithError = false;
+        this.isFormSuccess = true;
+      openapi(methods.POST, routes.FEEDBACK, {
+        "description": this.feedback,
+        "email": this.getEmail,
+        "accountID": this.getID
+        }).then(data => {
+        if(data.id !=null){
+          
+  alert("Feedback Success");
+        }
+        else 
+  alert("Feedback Fail");
+        });
 
-      if (!this.email) {
-        this.highlightEmailWithError = true;
+      }
+      if (!this.feedback) {
+        this.highlightFeedbackWithError = true;
 
-        if (this.email && !isValidEmail(this.email)) {
-          this.emailRequiredLabel = this.emailNotValidLabel;
+        if (this.feedback) {
+          this.feedbackRequiredLabel = this.feedbackNotValidLabel;
         }
       } else {
-        this.highlightEmailWithError = false;
+        this.highlightFeedbackWithError = false;
       }
     },
-    checkEmailOnKeyUp (emailValue) {
-      if (emailValue && isValidEmail(emailValue)) {
-        this.highlightEmailWithError = false;
+    checkFeedbackOnKeyUp (feedbackValue) {
+      if (feedbackValue) {
+        this.highlightFeedbackWithError = false;
       } else {
-        this.highlightEmailWithError = true;
+        this.highlightFeedbackWithError = true;
 
-        if (!isValidEmail(emailValue)) {
-          this.emailRequiredLabel = this.emailNotValidLabel;
-        }
       }
     }
-  }
+  },
+   computed:{
+  getEmail() {
+  let name = this.$store.getters.getEmail;
+  if (name === '') {
+				return 'user';
+			} else {
+				return name;
+			}
+},
+getID () {
+			let name = this.$store.getters.getID;
+			
+			if (name === '') {
+				return 'user';
+			} else {
+				return name;
+			}
+    },
+}
 };
 
 </script>

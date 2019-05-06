@@ -394,7 +394,7 @@ export function _parseJSON(response) {
 export const routes = {
     ACCOUNT: 'accounts',
     PASSWORD: 'accounts/updatePassword',
-    ADMINS: 'Account/AccountsInRole?role=Admin',
+    FEEDBACK: 'feedback',
     COUNTUSERS: 'Account/CountUsers',
     USERINFO: 'Account/UserInfo',
     UPDATEPROFILE: 'Account/UpdateProfile',

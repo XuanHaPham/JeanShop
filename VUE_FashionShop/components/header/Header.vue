@@ -35,12 +35,12 @@
               <i class="fa fa-linkedin"></i>
             </a>
             <span width="40px"/>
-            <nuxt-link class="navbar-item" :to="{ name: 'Contact-contact' }"  align="center" >
+            <!-- <nuxt-link class="navbar-item" :to="{ name: 'Contact-contact' }"  align="center" >
 				    <div class="icon">
                 <i class="fa fa-commenting"></i>
               </div>
               <h1> Contact Us</h1>
-				</nuxt-link>
+				</nuxt-link> -->
             <!-- <a href="#contact" margin="20px">
               
         </a> -->
