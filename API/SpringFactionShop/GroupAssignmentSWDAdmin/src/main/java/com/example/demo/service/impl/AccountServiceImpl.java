@@ -47,12 +47,12 @@ public class AccountServiceImpl implements AccountService {
         List<AccountDTO> accountDTOS = new ArrayList<>();
         ModelMapper modelMapper = new ModelMapper();
         for (Account acc : accounts ) {
+            if(accountRoleRepository.getRoleIDByAccountID(acc.getId()) != null)
+            if (accountRoleRepository.getRoleIDByAccountID(acc.getId()) == 1)
             accountDTOS.add(modelMapper.map(acc, AccountDTO.class));
-
         }
         return accountDTOS;
     }
-
     @Override
     public Boolean delete(Integer id) {
         Optional.ofNullable(accountRepository.findById(id)).orElseThrow(() ->new EntityNotFoundException());
@@ -64,10 +64,12 @@ public class AccountServiceImpl implements AccountService {
     public AccountDTO insert(AccountDTO accountDTO) {
         ModelMapper modelMapper = new ModelMapper();
         Account account = modelMapper.map(accountDTO, Account.class);
+        account.setStatus(true);
         account = accountRepository.save(account);
         AccountRole accountRole = new AccountRole();
         accountRole.setRoleID(1);
         accountRole.setAccountID(account.getId());
+        accountRole.setStatus(true);
         accountRoleRepository.save(accountRole);
         AccountDTO dto = modelMapper.map(account, AccountDTO.class);
         dto.setRoleID(1);
