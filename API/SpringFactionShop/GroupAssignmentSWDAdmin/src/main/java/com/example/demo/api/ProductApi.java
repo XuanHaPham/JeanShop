@@ -1,4 +1,4 @@
-package com.example.demo.api;
+package main.java.com.example.demo.api;
 
 import com.example.demo.service.dto.ProductDTO;
 import io.swagger.annotations.ApiOperation;

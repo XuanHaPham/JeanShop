@@ -1,4 +1,4 @@
-package com.example.demo.service.impl;
+package main.java.com.example.demo.service.impl;
 
 import com.example.demo.persistent.entity.Account;
 import com.example.demo.persistent.repository.AccountRepository;

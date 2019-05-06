@@ -1,4 +1,4 @@
-package com.example.demo.service.dto;
+package main.java.com.example.demo.service.dto;
 
 import javax.persistence.Column;
 import java.util.Date;

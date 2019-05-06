@@ -1,4 +1,4 @@
-package com.example.demo.api.impl;
+package main.java.com.example.demo.api.impl;
 
 import com.example.demo.api.ConfigurationApi;
 import com.example.demo.service.ConfigurationService;

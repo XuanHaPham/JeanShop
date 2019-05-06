@@ -1,4 +1,4 @@
-package com.example.demo.service.dto;
+package main.java.com.example.demo.service.dto;
 
 import java.io.Serializable;
 import java.util.Date;
