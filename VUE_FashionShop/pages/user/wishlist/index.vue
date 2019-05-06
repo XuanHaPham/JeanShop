@@ -14,7 +14,7 @@
 
 <script>
 import VmProductsList from '@/components/Products';
-import { getByTitle } from '@/assets/filters';
+import { getByTitle, getByCategory } from '@/assets/filters';
 
 export default {
 	name: 'user-wishlist',

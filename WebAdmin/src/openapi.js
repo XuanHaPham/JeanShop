@@ -16,17 +16,18 @@ export function _parseJSON(response) {
 export const routes = {
     ACCOUNT: 'accounts',
     USERS: 'accounts',
-    ADMINS: 'Account/AccountsInRole?role=Admin',
-    COUNTUSERS: 'Account/CountUsers',
+    FEEDBACK: 'feedback/getAll',
+    REMOVEFEEDBACK:'feedback',
+    CATEGORY: 'category',
     USERINFO: 'Account/UserInfo',
     UPDATEPROFILE: 'Account/UpdateProfile',
     CHANGEPASSWORD: 'Account/ChangePassword',
     EVENTS: 'Events',
     EVENTTYPES: 'EventTypes',
-    NEWS: 'News',
-    ORGANIZATIONS: 'Organizations',
-    ORGANIZATIONMEMBER: 'OrganizationMember',
-    ROLES: 'Roles',
+    DELPRODUCTS: 'products',
+    PRODUCTS: 'products',
+    GETPRODUCTS: 'products/getAllProduct',
+    ROLES: 'roles',
     CONFIGURATION: 'Configurations',
     SYSTEMRESOURCES: 'SystemResources'
 }
@@ -76,8 +77,8 @@ export function openapi(method, route, data, params) {
     let url = `${base}/${route}`;
     let body = null;
     if (data) {
-        if ((method === methods.PUT || method === methods.DELETE) && data.ID) {
-            url += `/${data.ID}`;
+        if (( method === methods.DELETE) && data.id) {
+            url += `/${data.id}`;
         }
         Object.keys(data).forEach((key) => (data[key] == null) && delete data[key]);
         body = JSON.stringify(data);

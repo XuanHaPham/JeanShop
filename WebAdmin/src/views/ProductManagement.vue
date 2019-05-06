@@ -17,12 +17,12 @@
         <b-card class="card-accent-info" :header="'Detail of `' + current.Name + '`'">
           <b-form>
             <b-form-group>
-              <b-input-group v-show="current.ID != 0">
-                <b-input-group-prepend><b-input-group-text>ID</b-input-group-text></b-input-group-prepend>
-                <b-form-input disabled type="text" v-model="current.ID"></b-form-input>
+              <b-input-group v-show="current.id != 0">
+                <b-input-group-prepend><b-input-group-text>id</b-input-group-text></b-input-group-prepend>
+                <b-form-input disabled type="text" v-model="current.id"></b-form-input>
               </b-input-group>
             </b-form-group>
-            <b-form-group v-for="field in fields" :key="field.key" v-if="['ID', 'status', 'Creator', 'TimeCreate'].indexOf(field.key) === -1">
+            <b-form-group v-for="field in fields" :key="field.key" v-if="['id', 'status', 'creator', 'timeCreated'].indexOf(field.key) === -1">
               <b-input-group>
                 <b-input-group-prepend><b-input-group-text>{{field.key}}</b-input-group-text></b-input-group-prepend>
                 <b-form-input type="text" v-model="current[field.key]"></b-form-input>
@@ -37,12 +37,12 @@
             <b-form-group>
               <c-switch color="primary" variant="3d" v-model="current.status"/>
             </b-form-group>
-            <div class="btn-group form-actions animated fadeIn" v-if="!detailMessage && current.ID !== 0">
+            <div class="btn-group form-actions animated fadeIn" v-if="!detailMessage && current.id !== 0">
               <!-- <b-button @click="viewMembers = true" type="submit" variant="outline-primary">View Members</b-button> -->
               <b-button @click="update" type="submit" variant="outline-primary">Update</b-button>
               <b-button @click="remove" type="reset" variant="outline-danger">Remove</b-button>
             </div>
-            <div class="form-actions animated fadeIn" v-if="!detailMessage && current.ID === 0">
+            <div class="form-actions animated fadeIn" v-if="!detailMessage && current.id === 0">
               <b-button @click="add" type="submit" block variant="outline-primary">Add</b-button>
             </div>
             <div v-if="detailMessage">
@@ -76,18 +76,18 @@ export default {
       detailMessage: '',
       viewMembers: false,
       fields: [
-        {key: 'ID', sortable: true},
-        {key: 'Name', sortable: true},
-        {key: 'Description'},
-        {key: 'TimeCreate', sortable: true},
-        {key: 'Creator', formatter: id => `User`},
+        {key: 'id', sortable: true},
+        {key: 'name', sortable: true},
+        {key: 'description'},
+        // {key: 'timeCreated', sortable: true},
+        {key: 'creator', formatter: id => `User`},
         {key: 'status'},
-        {key: 'Category', sortable: true},
-        {key: 'Size', sortable: true},
-        {key: 'Code'},
-        {key: 'Price', sortable: true},
-        {key: 'Overview'},
-        {key: 'Quantity', sortable: true}
+        {key: 'categoryID', sortable: true},
+        {key: 'size', sortable: true},
+        {key: 'code'},
+        {key: 'price', sortable: true},
+        {key: 'overview'},
+        {key: 'quantity', sortable: true}
       ],
     }
   },
@@ -98,7 +98,7 @@ export default {
     refresh: function() {
       this.loading = true;
       this.current = null;
-      openapi(methods.GET, routes.ORGANIZATIONS).then(data => {
+      openapi(methods.GET, routes.GETPRODUCTS).then(data => {
         this.loading = false;
         this.items = data;
       })
@@ -117,7 +117,7 @@ export default {
     },
     update: function() {
       this.detailMessage = 'Updating...';
-      openapi(methods.PUT, routes.ORGANIZATIONS, this.current).then(data => {
+      openapi(methods.PUT, routes.PRODUCTS, this.current).then(data => {
         if (data.Message) {
           this.detailMessage = data.Message;
         } else {
@@ -128,7 +128,7 @@ export default {
     },
     remove: function() {
       this.detailMessage = 'Removing...';
-      openapi(methods.DELETE, routes.ORGANIZATIONS, this.current).then(data => {
+      openapi(methods.DELETE, routes.DELPRODUCTS, this.current).then(data => {
         this.detailMessage = 'Removed successfully!';
         this.items = this.items.filter(item => item !== this.current);
         this.current = null;
@@ -137,15 +137,16 @@ export default {
     },
     create: function() {
       this.current = {
-        ID: 0,
+        id: 0,
         Key: '',
+        status: true,
         OrganizationMembers: []
       }
       this.viewMembers = false;
     },
     add: function() {
       this.detailMessage = 'Adding...';
-      openapi(methods.POST, routes.ORGANIZATIONS, this.current).then(data => {
+      openapi(methods.POST, routes.PRODUCTS, this.current).then(data => {
         this.detailMessage = 'Added successfully!';
         // this.items.push(data);
         this.current = data;

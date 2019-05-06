@@ -14,35 +14,29 @@
       </b-col>
 
       <b-col :lg="viewMembers ? 4 : 6" v-if="current" class="animated fadeIn">
-        <b-card class="card-accent-info" :header="'Detail of `' + current.Name + '`'">
+        <b-card class="card-accent-info" :header="'Detail of `' + current.username + '`'">
           <b-form>
             <b-form-group>
-              <b-input-group v-show="current.ID != 0">
+              <b-input-group v-show="current.id != 0">
                 <b-input-group-prepend><b-input-group-text>ID</b-input-group-text></b-input-group-prepend>
-                <b-form-input disabled type="text" v-model="current.ID"></b-form-input>
+                <b-form-input disabled type="text" v-model="current.id"></b-form-input>
               </b-input-group>
             </b-form-group>
-            <b-form-group v-for="field in fields" :key="field.key" v-if="['ID', 'status', 'Creator', 'TimeCreate'].indexOf(field.key) === -1">
+            <b-form-group v-for="field in fields" :key="field.key" v-if="['id', 'status', 'creator', 'timeCreate'].indexOf(field.key) === -1">
               <b-input-group>
                 <b-input-group-prepend><b-input-group-text>{{field.key}}</b-input-group-text></b-input-group-prepend>
                 <b-form-input type="text" v-model="current[field.key]"></b-form-input>
               </b-input-group>
             </b-form-group>
-            <b-form-group v-if="current.Account">
-              <b-input-group>
-                <b-input-group-prepend><b-input-group-text>Creator</b-input-group-text></b-input-group-prepend>
-                <b-form-input disabled type="text" v-model="current.Account.UserName"></b-form-input>
-              </b-input-group>
-            </b-form-group>
             <b-form-group>
               <c-switch color="primary" variant="3d" v-model="current.status"/>
             </b-form-group>
-            <div class="btn-group form-actions animated fadeIn" v-if="!detailMessage && current.ID !== 0">
+            <div class="btn-group form-actions animated fadeIn" v-if="!detailMessage && current.id !== 0">
               <!-- <b-button @click="viewMembers = true" type="submit" variant="outline-primary">View Members</b-button> -->
-              <b-button @click="update" type="submit" variant="outline-primary">Update</b-button>
+              <!-- <b-button @click="update" type="submit" variant="outline-primary">Update</b-button> -->
               <b-button @click="remove" type="reset" variant="outline-danger">Remove</b-button>
             </div>
-            <div class="form-actions animated fadeIn" v-if="!detailMessage && current.ID === 0">
+            <div class="form-actions animated fadeIn" v-if="!detailMessage && current.id === 0">
               <b-button @click="add" type="submit" block variant="outline-primary">Add</b-button>
             </div>
             <div v-if="detailMessage">
@@ -52,7 +46,7 @@
         </b-card>
       </b-col>
       <b-col :lg="viewMembers ? 4 : 6" v-if="viewMembers">
-        <c-table :table-data="current.OrganizationMembers.map(m => m.Account)" hover :caption="'Members of ' + current.Name"></c-table>        
+        <c-table :table-data="current.OrganizationMembers.map(m => m.Account)" hover :caption="'Members of ' + current.username"></c-table>        
       </b-col>
     </b-row>
 
@@ -66,7 +60,7 @@ import { Switch as cSwitch } from '@coreui/vue'
 import { openapi, methods, routes } from '@/openapi'
 
 export default {
-  name: 'tables',
+  username: 'tables',
   components: {cTable, cSwitch},
   data: () => {
     return {
@@ -76,8 +70,8 @@ export default {
       detailMessage: '',
       viewMembers: false,
       fields: [
-        {key: 'ID', sortable: true},
-        {key: 'Name', sortable: true},
+        {key: 'id', sortable: true},
+        {key: 'username', sortable: true},
         {key: 'status'}
       ],
     }
@@ -89,7 +83,7 @@ export default {
     refresh: function() {
       this.loading = true;
       this.current = null;
-      openapi(methods.GET, routes.ORGANIZATIONS).then(data => {
+      openapi(methods.GET, routes.CATEGORY).then(data => {
         this.loading = false;
         this.items = data;
       })
@@ -106,20 +100,20 @@ export default {
     hideWarning: function() {
       this.detailMessage = ''
     },
-    update: function() {
-      this.detailMessage = 'Updating...';
-      openapi(methods.PUT, routes.ORGANIZATIONS, this.current).then(data => {
-        if (data.Message) {
-          this.detailMessage = data.Message;
-        } else {
-          this.detailMessage = 'Updated successfully!';
-          this.hideSuccess();
-        }
-      });
-    },
+    // update: function() {
+    //   this.detailMessage = 'Updating...';
+    //   openapi(methods.PUT, routes.CATEGORY, this.current).then(data => {
+    //     if (data.Message) {
+    //       this.detailMessage = data.Message;
+    //     } else {
+    //       this.detailMessage = 'Updated successfully!';
+    //       this.hideSuccess();
+    //     }
+    //   });
+    // },
     remove: function() {
       this.detailMessage = 'Removing...';
-      openapi(methods.DELETE, routes.ORGANIZATIONS, this.current).then(data => {
+      openapi(methods.DELETE, routes.CATEGORY, this.current).then(data => {
         this.detailMessage = 'Removed successfully!';
         this.items = this.items.filter(item => item !== this.current);
         this.current = null;
@@ -128,15 +122,16 @@ export default {
     },
     create: function() {
       this.current = {
-        ID: 0,
+        id: 0,
         Key: '',
+        status: true,
         OrganizationMembers: []
       }
       this.viewMembers = false;
     },
     add: function() {
       this.detailMessage = 'Adding...';
-      openapi(methods.POST, routes.ORGANIZATIONS, this.current).then(data => {
+      openapi(methods.POST, routes.CATEGORY, this.current).then(data => {
         this.detailMessage = 'Added successfully!';
         this.items.push(data);
         this.current = data;

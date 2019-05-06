@@ -1,159 +1,162 @@
 export const state = () => ({
-  products: [
-    {
-      id: 1,
-      title: 'Product 1',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      price: 50,
-      ratings: 3,
-      reviews: 5,
-      isAddedToCart: false,
-      isAddedBtn: false,
-      isFavourite: false,
-      quantity: 1
-    },
-    {
-      id: 2,
-      title: 'Product 2',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      price: 35,
-      ratings: 5,
-      reviews: 10,
-      isAddedToCart: false,
-      isAddedBtn: false,
-      isFavourite: false,
-      quantity: 1
-    },
-    {
-      id: 3,
-      title: 'Product 3',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      price: 110,
-      ratings: 2,
-      reviews: 3,
-      isAddedToCart: false,
-      isAddedBtn: false,
-      isFavourite: false,
-      quantity: 1
-    },
-    {
-      id: 4,
-      title: 'Product 4',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      price: 50,
-      ratings: 1,
-      reviews: 0,
-      isAddedToCart: false,
-      isAddedBtn: false,
-      isFavourite: false,
-      quantity: 1
-    },
-    {
-      id: 5,
-      title: 'Product 5',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      price: 35,
-      ratings: 4,
-      reviews: 2,
-      isAddedToCart: false,
-      isAddedBtn: false,
-      isFavourite: false,
-      quantity: 1
-    },
-    {
-      id: 6,
-      title: 'Product 6',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      price: 110,
-      ratings: 5,
-      reviews: 1,
-      isAddedToCart: false,
-      isAddedBtn: false,
-      isFavourite: false,
-      quantity: 1
-    },
-    {
-      id: 7,
-      title: 'Product 7',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      price: 50,
-      ratings: 5,
-      reviews: 7,
-      isAddedToCart: false,
-      isAddedBtn: false,
-      isFavourite: false,
-      quantity: 1
-    },
-    {
-      id: 12,
-      title: 'Product 12',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      price: 35,
-      ratings: 3,
-      reviews: 0,
-      isAddedToCart: false,
-      isAddedBtn: false,
-      isFavourite: false,
-      quantity: 1
-    },
-    {
-      id: 11,
-      title: 'Product 11',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      price: 35,
-      ratings: 3,
-      reviews: 0,
-      isAddedToCart: false,
-      isAddedBtn: false,
-      isFavourite: false,
-      quantity: 1
-    },
-    {
-      id: 8,
-      title: 'Product 8',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      price: 35,
-      ratings: 3,
-      reviews: 0,
-      isAddedToCart: false,
-      isAddedBtn: false,
-      isFavourite: false,
-      quantity: 1
-    },
-    {
-      id: 10,
-      title: 'Product 10',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      price: 35,
-      ratings: 3,
-      reviews: 0,
-      isAddedToCart: false,
-      isAddedBtn: false,
-      isFavourite: false,
-      quantity: 1
-    },
-    {
-      id: 9,
-      title: 'Product 9',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      price: 110,
-      ratings: 4,
-      reviews: 2,
-      isAddedToCart: false,
-      isAddedBtn: false,
-      isFavourite: false,
-      quantity: 1
-    }
-  ],
+  // products: [
+  //   {
+  //     id: 1,
+  //     title: 'Product 1',
+  //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  //     price: 50,
+  //     ratings: 3,
+  //     reviews: 5,
+  //     addedToCart: false,
+  //     addedBtn: false,
+  //     favourite: false,
+  //     buyquantity: 1
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'Product 2',
+  //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  //     price: 35,
+  //     ratings: 5,
+  //     reviews: 10,
+  //     addedToCart: false,
+  //     addedBtn: false,
+  //     favourite: false,
+  //     buyquantity: 1
+  //   },
+  //   {
+  //     id: 3,
+  //     title: 'Product 3',
+  //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  //     price: 110,
+  //     ratings: 2,
+  //     reviews: 3,
+  //     addedToCart: false,
+  //     addedBtn: false,
+  //     favourite: false,
+  //     buyquantity: 1
+  //   },
+  //   {
+  //     id: 4,
+  //     title: 'Product 4',
+  //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  //     price: 50,
+  //     ratings: 1,
+  //     reviews: 0,
+  //     addedToCart: false,
+  //     addedBtn: false,
+  //     favourite: false,
+  //     buyquantity: 1
+  //   },
+  //   {
+  //     id: 5,
+  //     title: 'Product 5',
+  //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  //     price: 35,
+  //     ratings: 4,
+  //     reviews: 2,
+  //     addedToCart: false,
+  //     addedBtn: false,
+  //     favourite: false,
+  //     buyquantity: 1
+  //   },
+  //   {
+  //     id: 6,
+  //     title: 'Product 6',
+  //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  //     price: 110,
+  //     ratings: 5,
+  //     reviews: 1,
+  //     addedToCart: false,
+  //     addedBtn: false,
+  //     favourite: false,
+  //     buyquantity: 1
+  //   },
+  //   {
+  //     id: 7,
+  //     title: 'Product 7',
+  //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  //     price: 50,
+  //     ratings: 5,
+  //     reviews: 7,
+  //     addedToCart: false,
+  //     addedBtn: false,
+  //     favourite: false,
+  //     buyquantity: 1
+  //   },
+  //   {
+  //     id: 12,
+  //     title: 'Product 12',
+  //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  //     price: 35,
+  //     ratings: 3,
+  //     reviews: 0,
+  //     addedToCart: false,
+  //     addedBtn: false,
+  //     favourite: false,
+  //     buyquantity: 1
+  //   },
+  //   {
+  //     id: 11,
+  //     title: 'Product 11',
+  //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  //     price: 35,
+  //     ratings: 3,
+  //     reviews: 0,
+  //     addedToCart: false,
+  //     addedBtn: false,
+  //     favourite: false,
+  //     buyquantity: 1
+  //   },
+  //   {
+  //     id: 8,
+  //     title: 'Product 8',
+  //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  //     price: 35,
+  //     ratings: 3,
+  //     reviews: 0,
+  //     addedToCart: false,
+  //     addedBtn: false,
+  //     favourite: false,
+  //     buyquantity: 1
+  //   },
+  //   {
+  //     id: 10,
+  //     title: 'Product 10',
+  //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  //     price: 35,
+  //     ratings: 3,
+  //     reviews: 0,
+  //     addedToCart: false,
+  //     addedBtn: false,
+  //     favourite: false,
+  //     buyquantity: 1
+  //   },
+  //   {
+  //     id: 9,
+  //     title: 'Product 9',
+  //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+  //     price: 110,
+  //     ratings: 4,
+  //     reviews: 2,
+  //     addedToCart: false,
+  //     addedBtn: false,
+  //     favourite: false,
+  //     buyquantity: 1
+  //   }
+  // ],
+  products:[],
   userInfo: {
     isLoggedIn: false,
     isSignedUp: false,
     isPassword: false,
     isUpdate: false,
     hasSearched: false,
+    hasCategory: false,
     ID:'',
     name: '',
     productTitleSearched: '',
+    productTitleCategory: '',
     email: '',
     phoneNumber: '',
     address: '',
@@ -175,12 +178,12 @@ export const state = () => ({
 export const getters = {
   productsAdded: state => {
     return state.products.filter(el => {
-      return el.isAddedToCart;
+      return el.addedToCart;
     });
   },
   productsAddedToFavourite: state => {
     return state.products.filter(el => {
-      return el.isFavourite;
+      return el.favourite;
     });
   },
   getProductById: state => id => {
@@ -240,8 +243,8 @@ export const getters = {
   isCheckoutModalOpen: state => {
     return state.systemInfo.openCheckoutModal;
   },
-  quantity: state => {
-    return state.products.quantity;
+  buyquantity: state => {
+    return state.products.buyquantity;
   }
 }
 
@@ -249,28 +252,33 @@ export const mutations = {
   addToCart: (state, id) => {
     state.products.forEach(el => {
       if (id === el.id) {
-        el.isAddedToCart = true;
+        el.addedToCart = true;
       }
     });
   },
   setAddedBtn: (state, data) => {
     state.products.forEach(el => {
       if (data.id === el.id) {
-        el.isAddedBtn = data.status;
+        el.addedBtn = data.status;
       }
     });
   },
   removeFromCart: (state, id) => {
     state.products.forEach(el => {
       if (id === el.id) {
-        el.isAddedToCart = false;
+        el.addedToCart = false;
       }
     });
   },
   removeProductsFromFavourite: state => {
     state.products.filter(el => {
-      el.isFavourite = false;
+      el.favourite = false;
     });
+  },
+  setProducts: (state, newProduct) => {
+    state.product= null;
+    state.products = newProduct;
+   
   },
   isUserLoggedIn: (state, isUserLoggedIn) => {
     state.userInfo.isLoggedIn = isUserLoggedIn;
@@ -286,6 +294,9 @@ export const mutations = {
   },
   setHasUserSearched: (state, hasSearched) => {
     state.userInfo.hasSearched = hasSearched;
+  },
+  setHasUserCategory: (state, hasCategory) => {
+    state.userInfo.hasCategory = hasCategory;
   },
   setUserName: (state, name) => {
     state.userInfo.name = name;
@@ -317,6 +328,9 @@ export const mutations = {
   setProductTitleSearched: (state, titleSearched) => {
     state.userInfo.productTitleSearched = titleSearched;
   },
+  setProductTitleCategory: (state, titleCategory) => {
+    state.userInfo.productTitleCategory = titleCategory;
+  },
   showLoginModal: (state, show) => {
     state.systemInfo.openLoginModal = show;
   },
@@ -335,21 +349,21 @@ export const mutations = {
   addToFavourite: (state, id) => {
     state.products.forEach(el => {
       if (id === el.id) {
-        el.isFavourite = true;
+        el.favourite = true;
       }
     });
   },
   removeFromFavourite: (state, id) => {
     state.products.forEach(el => {
       if (id === el.id) {
-        el.isFavourite = false;
+        el.favourite = false;
       }
     });
   },
-  quantity: (state, data) => {
+  buyquantity: (state, data) => {
     state.products.forEach(el => {
       if (data.id === el.id) {
-        el.quantity = data.quantity;
+        el.buyquantity = data.buyquantity;
       }
     });
   },
@@ -395,7 +409,7 @@ export const routes = {
     ACCOUNT: 'accounts',
     PASSWORD: 'accounts/updatePassword',
     FEEDBACK: 'feedback',
-    COUNTUSERS: 'Account/CountUsers',
+    GETPRODUCTS: 'products/getAllProduct',
     USERINFO: 'Account/UserInfo',
     UPDATEPROFILE: 'Account/UpdateProfile',
     CHANGEPASSWORD: 'Account/ChangePassword',

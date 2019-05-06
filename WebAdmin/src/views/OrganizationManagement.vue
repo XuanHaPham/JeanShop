@@ -14,7 +14,7 @@
       </b-col>
 
       <b-col :lg="viewMembers ? 4 : 6" v-if="current" class="animated fadeIn">
-        <b-card class="card-accent-info" :header="'Detail of `' + current.Name + '`'">
+        <b-card class="card-accent-info" :header="'Detail of `' + current.name + '`'">
           <b-form>
             <b-form-group>
               <b-input-group v-show="current.ID != 0">
@@ -22,7 +22,7 @@
                 <b-form-input disabled type="text" v-model="current.ID"></b-form-input>
               </b-input-group>
             </b-form-group>
-            <b-form-group v-for="field in fields" :key="field.key" v-if="['ID', 'status', 'Creator', 'TimeCreate'].indexOf(field.key) === -1">
+            <b-form-group v-for="field in fields" :key="field.key" v-if="['id', 'status', 'creator', 'timeCreate'].indexOf(field.key) === -1">
               <b-input-group>
                 <b-input-group-prepend><b-input-group-text>{{field.key}}</b-input-group-text></b-input-group-prepend>
                 <b-form-input type="text" v-model="current[field.key]"></b-form-input>

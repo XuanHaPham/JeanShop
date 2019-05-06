@@ -13,7 +13,7 @@
 						<label class="label">Your name</label>
               <div class="control">
                 <input
-                    :class="[highlightEmailWithError ? 'input is-danger' : 'input']"
+                    :class="[highlightEmailWithError ? 'input' : 'input']"
                     type="text"
                     :placeholder="namePlaceholder"
                     name="name"
@@ -30,13 +30,17 @@
                     :placeholder="emailPlaceholder"
                     name="emailName"
                     v-model="email"
+                    @keyup="checkEmailOnKeyUp(email)"
                   >
-              </div>
+              </div><span v-if="highlightEmailWithError !== null" class="icon is-small is-right">
+                    <i :class="[highlightEmailWithError ? 'fa fa-exclamation-circle' : 'fa fa-check']"></i>
+                  </span>
+                <p v-if="highlightEmailWithError" class="help is-danger">{{ emailRequiredLabel }}</p>
             </div>
             <div class="field">
               <label class="label">Message</label>
               <div class="control">
-                <textarea class="textarea" placeholder="Textarea"></textarea>
+                <textarea  v-model="feedback" class="textarea" placeholder="Textarea"></textarea>
               </div>
             </div>
 
@@ -68,10 +72,9 @@
 </template>
 
 <script>
-import VmProductsList from '@/components/Products';
-import { getByTitle } from '@/assets/filters';
 import { METHODS } from 'http';
 import { isValidEmail } from '@/assets/validators';
+import { base, openapi, methods, routes, setToken, requestToken } from '@/store/index.js'
 export default {
 	name: 'contact',
 	data () {
@@ -79,11 +82,11 @@ export default {
       pageTitle: 'GET IN TOUCH',
       emailPlaceholder: 'Your Email',
       namePlaceholder: 'Your Name',
-      highlightAddressWithError: null,
       highlightEmailWithError: null,
       emailName:'',
       name:'',
-      email:''
+      email:'',
+      feedback:''
     //   noProductLabel: 'Your wishlist is empty'
     }
   },
@@ -91,7 +94,24 @@ export default {
     checkForm (e) {
       e.preventDefault();
 
+    if (this.email) {
+        
+        this.highlightFeedbackWithError = false;
+        this.isFormSuccess = true;
+      openapi(methods.POST, routes.FEEDBACK, {
+        "description": this.feedback,
+        "email": this.email,
+        "accountID": 11
+        }).then(data => {
+        if(data.id !=null){
+          
+  alert("Feedback Success");
+        }
+        else 
+  alert("Feedback Fail");
+        });
 
+      }
       if (!this.email) {
         this.highlightEmailWithError = true;
 
