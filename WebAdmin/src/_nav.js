@@ -20,21 +20,11 @@ export default {
       }
     },
     {
-      name: 'Accounts',
-      url: '/',
-      icon: 'icon-people',
-      children: [
-        {
-          name: 'Admin',
-          url: '/account-admins',
-          icon: 'icon-globe'
-        },
-        {
-          name: 'Users',
-          url: '/account-users',
-          icon: 'icon-directions'
-        },
-      ]
+      
+      name: 'Users',
+      url: '/account-users',
+      icon: 'icon-directions'
+     
     },
     {
       name: 'Roles',
