@@ -72,7 +72,6 @@
 </template>
 
 <script>
-import { getByTitle } from '@/assets/filters';
 import { METHODS } from 'http';
 import { isValidEmail } from '@/assets/validators';
 

@@ -6,28 +6,28 @@
           <aside class="menu ">
             
   <ul class="menu-list">
-    <li><a>All products</a></li>
+    <li><a @click="searchByCatelogy(-1)">All products</a></li>
   </ul>
   <p class="menu-label">
     CLOTHINGS
   </p>
   <ul class="menu-list">
-    <li><a>Clothing set</a></li>
-    <li><a>Dresses</a></li>
-    <li><a>Skirts</a></li>
-    <li><a>Shorts</a></li>
-    <li><a>Jumpsuit</a></li>
-    <li><a>Jackets</a></li>
+    <li><a @click="searchByCatelogy(3)">Clothing set</a></li>
+    <li><a @click="searchByCatelogy(4)">Dresses</a></li>
+    <li><a @click="searchByCatelogy(5)">Skirts</a></li>
+    <li><a @click="searchByCatelogy(6)">Shorts</a></li>
+    <li><a @click="searchByCatelogy(7)">Jumpsuit</a></li>
+    <li><a @click="searchByCatelogy(8)">Jackets</a></li>
   </ul>
   <p class="menu-label">
     Swimwear
   </p>
   <ul class="menu-list">
-    <li><a>Bundles</a></li>
-    <li><a>One pieces</a></li>
-    <li><a>Rashguands</a></li>
-    <li><a>Bikinis</a></li>
-    <li><a>Cover-ups</a></li>
+    <li><a @click="searchByCatelogy(9)">Bundles</a></li>
+    <li><a @click="searchByCatelogy(10)">One pieces</a></li>
+    <li><a @click="searchByCatelogy(11)">Rashguands</a></li>
+    <li><a @click="searchByCatelogy(12)">Bikinis</a></li>
+    <li><a @click="searchByCatelogy(13)">Cover-ups</a></li>
   </ul>
   <!-- <p class="menu-label">
     BAGS AND WALLETS
@@ -64,6 +64,17 @@ export default {
   components: {
     VmProductsList,
     VmHero
-  }
+  },
+  methods: {
+		searchByCatelogy (value) {
+			if (value > 0) {
+				this.$store.commit('setHasUserCategory', true);
+				this.$store.commit('setProductTitleCategory', value);
+			} else {
+				this.$store.commit('setHasUserCategory', false);
+				this.$store.commit('setProductTitleCategory', -1);
+			}
+		}
+	}
 };
 </script>

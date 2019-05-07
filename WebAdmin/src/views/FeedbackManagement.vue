@@ -14,7 +14,7 @@
       </b-col>
 
       <b-col lg="6" v-if="current" class="animated fadeIn">
-        <b-card class="card-accent-info" :header="'Detail of `' + current.Title + '`'">
+        <b-card class="card-accent-info" :header="'Detail of `' + current.email + '`'">
           <b-form>
 
             <!-- <b-form-group>
@@ -27,13 +27,13 @@
             <b-form-group>
               <b-input-group>
                 <b-input-group-prepend><b-input-group-text>Description</b-input-group-text></b-input-group-prepend>
-                <b-form-textarea disabled rows="2" max-rows="2" v-model="current.Description"></b-form-textarea>
+                <b-form-textarea disabled rows="2" max-rows="2" v-model="current.description"></b-form-textarea>
               </b-input-group>
             </b-form-group>
 
             <b-form-group v-for="field in fields" :key="field.key">
               <b-input-group
-                v-if="['ID', 'Status', 'Description', 'ImageURL'].indexOf(field.key) === -1"
+                v-if="['id', 'status', 'description', 'imageURL'].indexOf(field.key) === -1"
               >
                 <b-input-group-prepend>
                   <b-input-group-text>{{field.key}}</b-input-group-text>
@@ -78,13 +78,11 @@
                 </b-input-group> -->
 
             </b-form-group>
-            <div class="btn-group form-actions animated fadeIn" v-if="!detailMessage && current.ID !== ''">
+            <div class="btn-group form-actions animated fadeIn" v-if="!detailMessage && current.id !== ''">
               <!-- <b-button @click="update" type="submit" variant="outline-primary">Update</b-button> -->
               <b-button @click="remove" type="reset" variant="outline-danger">Remove</b-button>
             </div>
-            <div class="form-actions animated fadeIn" v-if="!detailMessage && current.ID === ''">
-              <b-button @click="add" type="submit" block variant="outline-primary">Add</b-button>
-            </div>
+           
             <div v-if="detailMessage">
               <b-button disabled block variant="outline-warning">{{detailMessage}}</b-button>
             </div>
@@ -115,12 +113,12 @@ export default {
       current: null,
       detailMessage: '',
       fields: [
-        {key: 'ID', sortable: true},
-        {key: 'Email', sortable: true},
-        {key: 'Description'},
-        {key: 'TimeCreated', sortable: true},
-        {key: 'Status', sortable: true},
-        {key: 'ImageURL'}
+        {key: 'id', sortable: true},
+        {key: 'email', sortable: true},
+        {key: 'description'},
+        {key: 'timeCreated', sortable: true},
+        {key: 'status', sortable: true}
+        // {key: 'ImageURL'}
       ]
     }
   },
@@ -131,7 +129,7 @@ export default {
     refresh: function() {
       this.loading = true;
       this.current = null;
-      openapi(methods.GET, routes.NEWS).then(data => {
+      openapi(methods.GET, routes.FEEDBACK).then(data => {
         this.loading = false;
         this.items = data;
       });
@@ -144,16 +142,16 @@ export default {
         this.detailMessage = ''
       }, 1000);
     },
-    update: function() {
-      this.detailMessage = 'Updating...';
-      openapi(methods.PUT, routes.NEWS, this.current).then(data => {
-        this.detailMessage = 'Updated successfully!';
-        this.hideSuccess();
-      });
-    },
+    // update: function() {
+    //   this.detailMessage = 'Updating...';
+    //   openapi(methods.PUT, routes.REMOVEFEEDBACK, this.current).then(data => {
+    //     this.detailMessage = 'Updated successfully!';
+    //     this.hideSuccess();
+    //   });
+    // },
     remove: function() {
       this.detailMessage = 'Removing...';
-      openapi(methods.DELETE, routes.NEWS, this.current).then(data => {
+      openapi(methods.DELETE, routes.REMOVEFEEDBACK, this.current).then(data => {
         this.detailMessage = 'Removed successfully!';
         this.items = this.items.filter(item => item !== this.current);
         this.current = null;
@@ -172,30 +170,7 @@ export default {
         Status: true
       }
     },
-    add: async function() {
-      this.detailMessage = 'Adding...';
-      var addObj = {
-        ID: 0,
-        Title: this.current.Title,
-        Content: this.current.Content,
-        ImageURL: this.current.ImageURL,
-        OrganizationMemberID: null,
-        Public: this.current.Public,
-        TimeCreated: new Date(),
-        Status: this.current.Status
-      };
-      await openapi(methods.POST, 
-        routes.ORGANIZATIONMEMBER, 
-        {"UserName": getUsername(), "OrgName": "Default"}).then(data => {
-          addObj.OrganizationMemberID = data.ID;
-      });
-      openapi(methods.POST, routes.NEWS, addObj).then(data => {
-        this.detailMessage = 'Added successfully!';
-        this.items.push(data);
-        this.current = data;
-        this.hideSuccess();
-      });
-    }
+    
   }
 }
 </script>

@@ -51,8 +51,6 @@
 </template>
 
 <script>
-import VmProductsList from '@/components/Products';
-import { getByTitle } from '@/assets/filters';
 import { base, openapi, methods, routes, setToken, requestToken } from '@/store/index.js'
 import { METHODS } from 'http';
 export default {

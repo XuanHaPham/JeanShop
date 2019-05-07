@@ -19,7 +19,7 @@
       </b-col>
 
       <b-col lg="6" v-if="current" class="animated fadeIn">
-        <b-card class="card-accent-info" :header="'Detail of `' + current.Name + '`'">
+        <b-card class="card-accent-info" :header="'Detail of `' + current.username + '`'">
           <b-form>
             <b-form-group v-for="field in fields" :key="field.key">
               <b-input-group v-if="['Status'].indexOf(field.key) === -1">
@@ -49,7 +49,7 @@
               v-if="!detailMessage && current.ID !== 0"
             >
               <b-button @click="update" type="submit" variant="outline-primary">Update</b-button>
-              <b-button @click="remove" type="reset" variant="outline-danger">Remove</b-button>
+              <!-- <b-button @click="remove" type="reset" variant="outline-danger">Remove</b-button> -->
             </div>
             <div class="form-actions animated fadeIn" v-if="!detailMessage && current.ID === 0">
               <b-button @click="add" type="submit" block variant="outline-primary">Add</b-button>
@@ -79,15 +79,14 @@ export default {
       current: null,
       detailMessage: "",
       fields: [
-        { key: "ID", sortable: true },
-        { key: "UserName", sortable: true },
-        { key: "Fullname", sortable: true },
-        { key: "Email", sortable: true },
-        { key: "Phone" },
-        { key: "Address" },
-        { key: "Date of Birth", sortable: true },
-        { key: "Point", sortable: true },
-        { key: "Shipping Address", sortable: true },
+        { key: "id", sortable: true },
+        { key: "username", sortable: true },
+        { key: "fullName", sortable: true },
+        { key: "email", sortable: true },
+        { key: "phoneNumber" },
+        { key: "address" },
+        { key: "dob", sortable: true },
+        { key: "shippingAddress", sortable: true },
         { key: "Status" },
       ]
     };
@@ -111,6 +110,17 @@ export default {
       setTimeout(() => {
         this.detailMessage = "";
       }, 1000);
+    },
+    update: function() {
+      this.detailMessage = 'Updating...';
+      openapi(methods.DELETE, routes.USERS, this.current).then(data => {
+        if (data.Message) {
+          this.detailMessage = data.Message;
+        } else {
+          this.detailMessage = 'Updated successfully!';
+          this.hideSuccess();
+        }
+      });
     },
     hideWarning: function() {
       this.detailMessage = "";

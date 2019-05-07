@@ -33,26 +33,15 @@ export default {
     },
     {
       name: 'Products',
-      url: '/',
-      icon: 'icon-screen-smartphone',
-      children: [
-        /* {
-          name: 'Organizations(DELETE LATER)',
-          url: '/organizations',
-          icon: 'icon-globe'
-        }, */
-        {
-          name: 'Products',
-          url: '/products',
-          icon: 'icon-calculator'
-        },
-        {
-          name: 'Categories',
-          url: '/categories',
-          icon: 'icon-globe'
-        }
-      ]
+      url: '/products',
+      icon: 'icon-calculator'
     },
+    {
+      name: 'Categories',
+      url: '/categories',
+      icon: 'icon-globe'
+    },
+   
 
     /* {
       name: 'Events',

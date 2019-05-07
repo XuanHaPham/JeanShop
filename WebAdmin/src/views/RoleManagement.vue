@@ -14,25 +14,25 @@
       </b-col>
 
       <b-col lg="6" v-if="current" class="animated fadeIn">
-        <b-card class="card-accent-info" :header="'Detail of `' + current.Name + '`'">
+        <b-card class="card-accent-info" :header="'Detail of `' + current.name + '`'">
           <b-form>
             <b-form-group>
               <b-input-group>
                 <b-input-group-prepend><b-input-group-text>Id</b-input-group-text></b-input-group-prepend>
-                <b-form-input type="text" disabled v-model="current.Id"></b-form-input>
+                <b-form-input type="text" disabled v-model="current.id"></b-form-input>
               </b-input-group>
             </b-form-group>
             <b-form-group>
               <b-input-group>
                 <b-input-group-prepend><b-input-group-text>Name</b-input-group-text></b-input-group-prepend>
-                <b-form-input type="text" v-model="current.Name"></b-form-input>
+                <b-form-input type="text" v-model="current.name"></b-form-input>
               </b-input-group>
             </b-form-group>
-            <div class="btn-group form-actions animated fadeIn" v-if="!detailMessage && current.Id !== ''">
+            <div class="btn-group form-actions animated fadeIn" v-if="!detailMessage && current.id !== ''">
               <b-button @click="update" type="submit" variant="outline-primary">Update</b-button>
-              <b-button @click="remove" type="reset" variant="outline-danger">Remove</b-button>
+              <b-button @click="remove" type="reset" variant="outline-danger">Remove</b-button> 
             </div>
-            <div class="form-actions animated fadeIn" v-if="!detailMessage && current.Id === ''">
+            <div class="form-actions animated fadeIn" v-if="!detailMessage && current.id === ''">
               <b-button @click="add" type="submit" block variant="outline-primary">Add</b-button>
             </div>
             <div v-if="detailMessage">
@@ -62,8 +62,8 @@ export default {
       current: null,
       detailMessage: '',
       fields: [
-        {key: 'Id', sortable: true},
-        {key: 'Name', sortable: true}
+        {key: 'id', sortable: true},
+        {key: 'name', sortable: true}
       ]
     }
   },
@@ -89,14 +89,14 @@ export default {
     },
     update: function() {
       this.detailMessage = 'Updating...';
-      openapi(methods.PUT, routes.ROLES, {}, this.current).then(data => {
+      openapi(methods.POST, routes.ROLES, {}, this.current).then(data => {
         this.detailMessage = 'Updated successfully!';
         this.hideSuccess();
       });
     },
     remove: function() {
       this.detailMessage = 'Removing...';
-      openapi(methods.DELETE, routes.ROLES, null, this.current).then(data => {
+      openapi(methods.DELETE, routes.ROLES, this.current).then(data => {
         this.detailMessage = 'Removed successfully!';
         this.items = this.items.filter(item => item !== this.current);
         this.current = null;
@@ -105,14 +105,14 @@ export default {
     },
     create: function() {
       this.current = {
-        Id: '',
-        Name: ''
+        id: '',
+        name: ''
       }
     },
     add: function() {
       this.detailMessage = 'Adding...';
-      var addObj = {Id: 0, Name: this.current.Name};
-      openapi(methods.POST, routes.ROLES, null, addObj).then(data => {
+      var addObj = {id: 0, name: this.current.name};
+      openapi(methods.POST, routes.ROLES, addObj).then(data => {
         this.detailMessage = 'Added successfully!';
         this.items.push(data);
         this.current = data;

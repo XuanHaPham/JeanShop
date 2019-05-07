@@ -10,7 +10,7 @@
 				<div v-if="!isCheckoutSection">
 					<div class="box" v-for="product in products" :key="product.id">
 						<button class="is-pulled-right button is-info is-inverted" @click="removeFromCart(product.id)">{{ removeLabel }}</button>
-						<p>{{ product.title }}  {{ product.quantity > 0 ?  ` - Quantity: ${product.quantity}` : ''}}</p>
+						<p>{{ product.name }}  {{ product.buyquantity > 0 ?  ` - buyquantity: ${product.buyquantity}` : ''}}</p>
 						<p>{{ product.price }} &dollar;</p>
 					</div>
 					<div v-if="products.length === 0">
@@ -60,15 +60,15 @@ export default {
 						pricesArray = [],
 						productLabel = '',
 						finalPrice = '',
-						quantity = 1;
+						buyquantity = 1;
 
 				productsAdded.forEach(product => {
 
-					if (product.quantity >= 1) {
-						quantity = product.quantity;
+					if (product.buyquantity >= 1) {
+						buyquantity = product.buyquantity;
 					}
 
-					pricesArray.push((product.price * quantity)); // get the price of every product added and multiply quantity
+					pricesArray.push((product.price * buyquantity)); // get the price of every product added and multiply buyquantity
 				});
 
 				finalPrice = pricesArray.reduce((a, b) => a + b, 0); // sum the prices
