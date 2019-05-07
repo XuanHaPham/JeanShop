@@ -19,7 +19,7 @@ public interface FeedbackApi {
     ResponseEntity<List<FeedbackDTO>> getAll();
 
     @ApiOperation(tags = {"Feedback",}, notes = "", value = "delete feedback by id")
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     ResponseEntity<Map<String, Boolean>> delete(@PathVariable("id") Integer id);
 
     @ApiOperation(tags = {"Feedback",}, notes = "", value = "get all feedback")

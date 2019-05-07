@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class FeedbackServiceImpl implements FeedbackService {
 
     private final FeedbackRepository feedbackRepository;
@@ -43,7 +45,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public Boolean deleteByID(Integer id){
         Optional.ofNullable(feedbackRepository.findById(id)).orElseThrow(() ->new EntityNotFoundException());
-        feedbackRepository.deleteByID(id);
+        feedbackRepository.deleteByIDModify(id);
         return true;
     }
 

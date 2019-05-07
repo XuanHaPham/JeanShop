@@ -16,6 +16,6 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
 
     @Query("UPDATE Feedback f SET f.status = false WHERE f.id = :id")
     @Modifying
-    void deleteByID(@Param("id") Integer id);
+    void deleteByIDModify(@Param("id") Integer id);
 
 }
