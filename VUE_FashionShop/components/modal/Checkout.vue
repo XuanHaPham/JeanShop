@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import { base, openapi, methods, routes, setToken, requestToken } from '@/store/index.js'
+
 export default {
 	name: 'checkout',
     
@@ -103,8 +105,22 @@ export default {
 		},
 		onNextBtn () {
 			if (this.isUserLoggedIn) {
-				this.isCheckoutSection = true;
-			} else {
+
+			openapi(methods.POST, routes.ORDERS, {
+        "products": this.products,
+        "accountID": this.getID
+        }).then(data => {
+        if(data.id !=null){
+			  alert("Feedback Success");
+			this.isCheckoutSection = true;
+
+        	}
+        	else 
+  			alert("Feedback Fail");
+        });
+
+			}
+			 else {
 				this.$store.commit('showCheckoutModal', false);
 				this.$store.commit('showLoginModal', true);
 			}

@@ -410,7 +410,7 @@ export const routes = {
     PASSWORD: 'accounts/updatePassword',
     FEEDBACK: 'feedback',
     GETPRODUCTS: 'products/getAllProduct',
-    USERINFO: 'Account/UserInfo',
+    ORDERS: 'bills',
     UPDATEPROFILE: 'Account/UpdateProfile',
     CHANGEPASSWORD: 'Account/ChangePassword',
     EVENTS: 'Events',

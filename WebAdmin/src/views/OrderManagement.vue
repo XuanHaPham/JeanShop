@@ -174,17 +174,17 @@ export default {
       current: null,
       detailMessage: "",
       fields: [
-        { key: "ID", sortable: true },
-        { key: "OrderDetails" },
-        { key: "Customer Name", sortable: true },
-        { key: "Channel", sortable: true },
-        { key: "Sub Total", sortable: true },
-        { key: "Shipping Fee", sortable: true },
-        { key: "Total", sortable: true },
-        { key: "Code", sortable: true },
-        { key: "TimeCreated", sortable: true },
-        { key: "NoteForDeliver" },
-        { key: "Status", sortable: true}
+        { key: "id", sortable: true },
+        { key: "orderDetails" },
+        { key: "customerName", sortable: true },
+        { key: "channel", sortable: true },
+        { key: "subTotal", sortable: true },
+        { key: "shippingFee", sortable: true },
+        { key: "total", sortable: true },
+        { key: "code", sortable: true },
+        { key: "timeCreated", sortable: true },
+        { key: "noteForDeliver" },
+        { key: "status", sortable: true}
       ]
     };
   },
@@ -195,7 +195,7 @@ export default {
     refresh: function() {
       this.loading = true;
       this.current = null;
-      openapi(methods.GET, routes.NEWS).then(data => {
+      openapi(methods.GET, routes.ORDERS).then(data => {
         this.loading = false;
         this.items = data;
       });
@@ -224,43 +224,43 @@ export default {
         this.hideSuccess();
       });
     },
-    create: function() {
-      this.current = {
-        ID: "",
-        Title: "",
-        Content: "",
-        ImageURL: "",
-        OrganizationMemberID: "",
-        Public: true,
-        TimeCreated: null,
-        Status: true
-      };
-    },
-    add: async function() {
-      this.detailMessage = "Adding...";
-      var addObj = {
-        ID: 0,
-        Title: this.current.Title,
-        Content: this.current.Content,
-        ImageURL: this.current.ImageURL,
-        OrganizationMemberID: null,
-        Public: this.current.Public,
-        TimeCreated: new Date(),
-        Status: this.current.Status
-      };
-      await openapi(methods.POST, routes.ORGANIZATIONMEMBER, {
-        UserName: getUsername(),
-        OrgName: "Default"
-      }).then(data => {
-        addObj.OrganizationMemberID = data.ID;
-      });
-      openapi(methods.POST, routes.NEWS, addObj).then(data => {
-        this.detailMessage = "Added successfully!";
-        this.items.push(data);
-        this.current = data;
-        this.hideSuccess();
-      });
-    }
+    // create: function() {
+    //   this.current = {
+    //     ID: "",
+    //     Title: "",
+    //     Content: "",
+    //     ImageURL: "",
+    //     OrganizationMemberID: "",
+    //     Public: true,
+    //     TimeCreated: null,
+    //     Status: true
+    //   };
+    // },
+    // add: async function() {
+    //   this.detailMessage = "Adding...";
+    //   var addObj = {
+    //     ID: 0,
+    //     Title: this.current.Title,
+    //     Content: this.current.Content,
+    //     ImageURL: this.current.ImageURL,
+    //     OrganizationMemberID: null,
+    //     Public: this.current.Public,
+    //     TimeCreated: new Date(),
+    //     Status: this.current.Status
+    //   };
+    //   await openapi(methods.POST, routes.ORGANIZATIONMEMBER, {
+    //     UserName: getUsername(),
+    //     OrgName: "Default"
+    //   }).then(data => {
+    //     addObj.OrganizationMemberID = data.ID;
+    //   });
+    //   openapi(methods.POST, routes.NEWS, addObj).then(data => {
+    //     this.detailMessage = "Added successfully!";
+    //     this.items.push(data);
+    //     this.current = data;
+    //     this.hideSuccess();
+    //   });
+    // }
   }
 };
 </script>

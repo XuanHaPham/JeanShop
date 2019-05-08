@@ -19,7 +19,7 @@ export const routes = {
     FEEDBACK: 'feedback/getAll',
     REMOVEFEEDBACK:'feedback',
     CATEGORY: 'category',
-    USERINFO: 'Account/UserInfo',
+    ORDERS: 'orders',
     UPDATEPROFILE: 'Account/UpdateProfile',
     CHANGEPASSWORD: 'Account/ChangePassword',
     EVENTS: 'Events',

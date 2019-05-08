@@ -2,8 +2,18 @@
   <div class="section">
     <div class="card is-clearfix columns">
         <figure class="card-image is-480x480 column is-one-thirds">
-          <img src="https://cdn10.bigcommerce.com/s-9ccdlm/products/6271/images/59396/AE6AA6C97CF7DEEE7662EDFD629836B8__55875.1515575456.1280.1280.jpg?c=2">
-        </figure>
+          <img v-if="product.categoryID == 4" src="https://cdn10.bigcommerce.com/s-9ccdlm/products/6271/images/59396/AE6AA6C97CF7DEEE7662EDFD629836B8__55875.1515575456.1280.1280.jpg?c=2" alt="Placeholder image">
+        <img v-if="product.categoryID == 3" src="https://cdn10.bigcommerce.com/s-9ccdlm/products/5445/images/52202/2972797472_1858141507__73192.1470194562.1280.1280.jpg?c=2" alt="Placeholder image">
+        <img v-if="product.categoryID == 5" src="https://cdn10.bigcommerce.com/s-9ccdlm/products/5566/images/53748/QQ20160730110501__88422.1474434359.1280.1280.jpg?c=2" alt="Placeholder image">
+        <img v-if="product.categoryID == 6" src="https://cdn10.bigcommerce.com/s-9ccdlm/products/1436/images/10610/D134.5__54183.1432361205.1280.1280.jpg?c=2" alt="Placeholder image">
+        <img v-if="product.categoryID == 7" src="https://cdn10.bigcommerce.com/s-9ccdlm/products/5541/images/53023/Unnamed_QQ_Screenshot20160823113330__39887.1471923697.1280.1280.png?c=2" alt="Placeholder image">
+        <img v-if="product.categoryID == 8" src="https://cdn10.bigcommerce.com/s-9ccdlm/products/6162/images/58765/9163681FAC7278476AE2D8204D14C756__41465.1509080996.500.659.jpg?c=2" alt="Placeholder image">
+        <img v-if="product.categoryID == 9" src="https://cdn10.bigcommerce.com/s-9ccdlm/products/3987/images/40633/First_photo_1__96693.1455262717.190.250.jpg?c=2" alt="Placeholder image">
+        <img v-if="product.categoryID == 10" src="https://cdn10.bigcommerce.com/s-9ccdlm/products/6692/images/64229/QQ_Photo20190315160210__78348.1553136543.190.250.jpg?c=2" alt="Placeholder image">
+        <img v-if="product.categoryID == 11" src="https://cdn10.bigcommerce.com/s-9ccdlm/products/6364/images/60243/SW609_6__12058.1521196381.190.250.jpg?c=2" alt="Placeholder image">
+        <img v-if="product.categoryID == 12" src="https://cdn10.bigcommerce.com/s-9ccdlm/products/6427/images/61148/5__27874.1522997351.190.250.jpg?c=2" alt="Placeholder image">
+        <img v-if="product.categoryID == 13" src="https://cdn10.bigcommerce.com/s-9ccdlm/products/6015/images/57646/SW100_Change_Photo1__89088.1461575338.1280.1280_1800x__67855.1496813830.190.250.jpg?c=2" alt="Placeholder image">
+      </figure>
         <div class="card-content column is-two-thirds">
           <div class="card-content__title">
             <h1 class="title is-4">{{ product.name}}
@@ -167,6 +177,10 @@ export default {
       width: 100%;
       margin-bottom: 10px;
     }
+  }
+  figure {
+    align-content: center;
+    align-self: center;
   }
 </style>
 
