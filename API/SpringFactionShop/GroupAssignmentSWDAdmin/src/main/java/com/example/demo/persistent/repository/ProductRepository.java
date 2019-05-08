@@ -24,9 +24,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("SELECT p FROM  Product p WHERE p.id = :id")
     Product findByID(@Param("id") Integer id);
 
-//    @Query("update Product p set p.status = false where p.id = :id")
-//    @Modifying
-//    void deleteByID(@Param("id") Integer id);
+    @Query("update Product p set p.quantity = :quantity where p.id = :id")
+    @Modifying
+    void updateQuantity(@Param("quantity") Integer quantity, @Param("id") Integer id);
 
 
 

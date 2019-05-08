@@ -1,27 +1,16 @@
-package com.example.demo.persistent.entity;
+package com.example.demo.service.dto;
 
-import javax.persistence.*;
-import java.util.Date;
+import java.io.Serializable;
 
-@Entity
-@Table(name = "bill_detail ")
-public class BillDetail {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+public class BillDetailDTO implements Serializable {
     private Integer id;
 
-    @Column(name = "bill_id")
     private Integer billID;
 
-    @Column(name = "product_id")
     private Integer productID;
 
-    @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "status")
     private Boolean status;
 
     public Integer getId() {
