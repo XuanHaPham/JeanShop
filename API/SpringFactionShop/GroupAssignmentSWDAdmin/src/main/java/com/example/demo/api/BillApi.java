@@ -1,6 +1,7 @@
 package com.example.demo.api;
 
 
+import com.example.demo.service.dto.BillDTO;
 import com.example.demo.service.dto.BillDetailDTO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
@@ -18,4 +19,14 @@ public interface BillApi {
     @PostMapping("{accountID}")
     ResponseEntity<Map<String, Boolean>> create(@RequestBody List<BillDetailDTO> billDetailDTO,
                                                 @PathVariable Integer accountID);
+
+    @ApiOperation(tags = {"Bill",}, notes = "", value = "Get All Bill")
+    @GetMapping("")
+    ResponseEntity<List<BillDTO>> getAllBill();
+
+    @ApiOperation(tags = {"Bill",}, notes = "", value = "get all product in Bill")
+    @GetMapping("{billID}")
+    ResponseEntity<List<BillDetailDTO>> getAllProductOfBill(@PathVariable Integer billID);
+
+
 }

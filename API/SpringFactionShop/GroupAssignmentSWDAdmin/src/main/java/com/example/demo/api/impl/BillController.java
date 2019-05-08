@@ -2,6 +2,7 @@ package com.example.demo.api.impl;
 
 import com.example.demo.api.BillApi;
 import com.example.demo.service.BillService;
+import com.example.demo.service.dto.BillDTO;
 import com.example.demo.service.dto.BillDetailDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,5 +25,17 @@ public class BillController implements BillApi {
         Map<String, Boolean> resul = new HashMap<>();
         resul.put("Content", result);
         return ResponseEntity.ok(resul);
+    }
+
+    @Override
+    public ResponseEntity<List<BillDTO>> getAllBill(){
+        List<BillDTO> billDTOS = billService.getAllBill();
+        return ResponseEntity.ok(billDTOS);
+    }
+
+    @Override
+    public ResponseEntity<List<BillDetailDTO>> getAllProductOfBill(@PathVariable Integer billID){
+        List<BillDetailDTO> billDetailDTOS = billService.getAllProductOfBill(billID);
+        return ResponseEntity.ok(billDetailDTOS);
     }
 }

@@ -6,12 +6,14 @@ import com.example.demo.persistent.repository.BillDetailRepository;
 import com.example.demo.persistent.repository.BillRepository;
 import com.example.demo.persistent.repository.ProductRepository;
 import com.example.demo.service.BillService;
+import com.example.demo.service.dto.BillDTO;
 import com.example.demo.service.dto.BillDetailDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.nio.channels.FileLock;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -53,5 +55,26 @@ public class BillServiceImpl implements BillService {
             System.out.println("AAAAAAAAAAAAAAAAAAAAAA"+ billDetail.getBillID());
         }
         return true;
+    }
+
+    @Override
+    public List<BillDTO> getAllBill(){
+        List<Bill> bills = billRepository.findAllByIsDelete();
+        List<BillDTO> billDTOS = new ArrayList<>();
+        ModelMapper modelMapper = new ModelMapper();
+        for (Bill b : bills ) {
+                    billDTOS.add(modelMapper.map(b, BillDTO.class));
+        }
+        return billDTOS;
+    }
+    @Override
+    public List<BillDetailDTO> getAllProductOfBill(Integer billID){
+        List<BillDetail> billDetails = billDetailRepository.findAllByIsDelete(billID);
+        List<BillDetailDTO> billDetailDTOS = new ArrayList<>();
+        ModelMapper modelMapper = new ModelMapper();
+        for (BillDetail b : billDetails ) {
+            billDetailDTOS.add(modelMapper.map(b, BillDetailDTO.class));
+        }
+        return billDetailDTOS;
     }
 }
