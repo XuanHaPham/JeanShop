@@ -1,10 +1,8 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.persistent.entity.CyberGaming;
 import com.example.demo.persistent.entity.Product;
 import com.example.demo.persistent.repository.ProductRepository;
 import com.example.demo.service.ProductService;
-import com.example.demo.service.dto.CyberGamingDTO;
 import com.example.demo.service.dto.ProductDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;

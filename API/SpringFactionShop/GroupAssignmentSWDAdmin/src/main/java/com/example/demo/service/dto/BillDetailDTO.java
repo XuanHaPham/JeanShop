@@ -7,6 +7,10 @@ public class BillDetailDTO implements Serializable {
 
     private Integer billID;
 
+    private float price;
+
+    private String code;
+
     private Integer productID;
 
     private Integer quantity;
@@ -17,6 +21,22 @@ public class BillDetailDTO implements Serializable {
 
     public Integer getBuyquantity() {
         return buyquantity;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public void setBuyquantity(Integer buyquantity) {

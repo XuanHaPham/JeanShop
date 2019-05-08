@@ -79,7 +79,10 @@ public class BillServiceImpl implements BillService {
         List<BillDetailDTO> billDetailDTOS = new ArrayList<>();
         ModelMapper modelMapper = new ModelMapper();
         for (BillDetail b : billDetails ) {
-            billDetailDTOS.add(modelMapper.map(b, BillDetailDTO.class));
+            BillDetailDTO billDetailDTO = modelMapper.map(b, BillDetailDTO.class);
+            billDetailDTO.setCode(productRepository.findByID(b.getProductID()).getCode());
+            billDetailDTO.setPrice(productRepository.findByID(b.getProductID()).getPrice());
+            billDetailDTOS.add(billDetailDTO);
         }
         return billDetailDTOS;
     }
