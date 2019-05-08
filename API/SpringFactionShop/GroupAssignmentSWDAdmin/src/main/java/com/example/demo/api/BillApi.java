@@ -15,7 +15,7 @@ import java.util.Map;
 @RequestMapping("/bills")
 public interface BillApi {
     @ApiOperation(tags = {"Bill",}, notes = "", value = "Create new Bill")
-    @PostMapping("")
+    @PostMapping("{accountID}")
     ResponseEntity<Map<String, Boolean>> create(@RequestBody List<BillDetailDTO> billDetailDTO,
-                                                @RequestParam Integer accountID);
+                                                @PathVariable Integer accountID);
 }

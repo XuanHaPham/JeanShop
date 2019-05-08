@@ -1,7 +1,5 @@
 package com.example.demo.persistent.entity;
 
-import io.swagger.models.auth.In;
-
 import javax.persistence.*;
 import java.util.Date;
 
