@@ -23,6 +23,17 @@ public class BillDTO implements Serializable {
 
     private Boolean status;
 
+    private String customerEmail;
+
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
     public Integer getId() {
         return id;
     }

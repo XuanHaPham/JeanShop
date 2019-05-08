@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.persistent.entity.Bill;
 import com.example.demo.persistent.entity.BillDetail;
+import com.example.demo.persistent.repository.AccountRepository;
 import com.example.demo.persistent.repository.BillDetailRepository;
 import com.example.demo.persistent.repository.BillRepository;
 import com.example.demo.persistent.repository.ProductRepository;
@@ -25,18 +26,20 @@ public class BillServiceImpl implements BillService {
      private final BillRepository billRepository;
      private final BillDetailRepository billDetailRepository;
      private final ProductRepository productRepository;
+     private final AccountRepository accountRepository;
 
-    public BillServiceImpl(BillRepository billRepository, BillDetailRepository billDetailRepository, ProductRepository productRepository) {
+    public BillServiceImpl(BillRepository billRepository, BillDetailRepository billDetailRepository, ProductRepository productRepository, AccountRepository accountRepository) {
         this.billRepository = billRepository;
         this.billDetailRepository = billDetailRepository;
         this.productRepository = productRepository;
+        this.accountRepository = accountRepository;
     }
 
     @Override
     public Boolean create(List<BillDetailDTO> billDetailDTOS, Integer accountID){
         float total = 0;
         for (BillDetailDTO b : billDetailDTOS) {
-            float sum = productRepository.findByID(b.getProductID()).getPrice()*b.getQuantity();
+            float sum = productRepository.findByID(b.getProductID()).getPrice()*b.getBuyquantity();
             total += sum;
         }
         Bill bill = new Bill();
@@ -46,15 +49,14 @@ public class BillServiceImpl implements BillService {
         bill.setAccountID(accountID);
         billRepository.save(bill);
         for (BillDetailDTO b : billDetailDTOS) {
-            int newQuantiTY = productRepository.findByID(b.getProductID()).getQuantity() - b.getQuantity();
+            int newQuantiTY = productRepository.findByID(b.getProductID()).getQuantity() - b.getBuyquantity();
             productRepository.updateQuantity(newQuantiTY, b.getProductID());
             BillDetail billDetail = new BillDetail();
             billDetail.setStatus(true);
-            billDetail.setQuantity(b.getQuantity());
+            billDetail.setQuantity(b.getBuyquantity());
             billDetail.setProductID(b.getProductID());
             billDetail.setBillID(bill.getId());
             billDetailRepository.save(billDetail);
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAA"+ billDetail.getBillID());
         }
         return true;
     }
@@ -65,7 +67,9 @@ public class BillServiceImpl implements BillService {
         List<BillDTO> billDTOS = new ArrayList<>();
         ModelMapper modelMapper = new ModelMapper();
         for (Bill b : bills ) {
-                    billDTOS.add(modelMapper.map(b, BillDTO.class));
+            BillDTO billDTO = modelMapper.map(b, BillDTO.class);
+            billDTO.setCustomerEmail(accountRepository.getEmailByID(b.getAccountID()));
+                    billDTOS.add(billDTO);
         }
         return billDTOS;
     }

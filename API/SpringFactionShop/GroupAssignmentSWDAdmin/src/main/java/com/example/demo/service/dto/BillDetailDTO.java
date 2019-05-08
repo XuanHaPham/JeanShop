@@ -11,7 +11,17 @@ public class BillDetailDTO implements Serializable {
 
     private Integer quantity;
 
+    private Integer buyquantity;
+
     private Boolean status;
+
+    public Integer getBuyquantity() {
+        return buyquantity;
+    }
+
+    public void setBuyquantity(Integer buyquantity) {
+        this.buyquantity = buyquantity;
+    }
 
     public Integer getId() {
         return id;
