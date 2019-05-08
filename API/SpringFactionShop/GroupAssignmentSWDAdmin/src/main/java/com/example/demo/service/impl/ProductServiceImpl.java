@@ -37,6 +37,7 @@ public class ProductServiceImpl implements ProductService {
             productDTO.setBuyquantity(1);
             productDTO.setAddedBtn(false);
             productDTO.setFavourite(false);
+            productDTO.setProductID(pro.getId());
             productDTOS.add(productDTO);
         }
         return productDTOS;

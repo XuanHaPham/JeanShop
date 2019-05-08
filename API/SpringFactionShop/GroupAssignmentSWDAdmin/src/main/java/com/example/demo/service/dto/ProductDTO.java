@@ -11,6 +11,8 @@ public class ProductDTO {
 
     private Integer id;
 
+    private Integer productID;
+
     private Integer categoryID;
 
     private Integer accountID;
@@ -44,6 +46,14 @@ public class ProductDTO {
 
     public Boolean getAddedToCart() {
         return isAddedToCart;
+    }
+
+    public Integer getProductID() {
+        return productID;
+    }
+
+    public void setProductID(Integer productID) {
+        this.productID = productID;
     }
 
     public void setAddedToCart(Boolean addedToCart) {

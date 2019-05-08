@@ -38,4 +38,12 @@ public class BillController implements BillApi {
         List<BillDetailDTO> billDetailDTOS = billService.getAllProductOfBill(billID);
         return ResponseEntity.ok(billDetailDTOS);
     }
+
+    @Override
+    public  ResponseEntity<Map<String, Boolean>> updateBillStatus(@PathVariable Integer id){
+        Boolean result = billService.updateStatus(id);
+        Map<String, Boolean> resul = new HashMap<>();
+        resul.put("Content", result);
+        return ResponseEntity.ok(resul);
+    }
 }

@@ -11,11 +11,13 @@ import com.example.demo.service.dto.BillDetailDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.nio.channels.FileLock;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -76,5 +78,15 @@ public class BillServiceImpl implements BillService {
             billDetailDTOS.add(modelMapper.map(b, BillDetailDTO.class));
         }
         return billDetailDTOS;
+    }
+
+    @Override
+    public Boolean updateStatus(Integer id){
+        Optional.ofNullable(billRepository.findById(id)).orElseThrow(() ->new EntityNotFoundException());
+        if(billRepository.findBillByID(id).getStatus())
+        billRepository.deleteByID(id, false);
+        else
+            billRepository.deleteByID(id, true);
+        return true;
     }
 }

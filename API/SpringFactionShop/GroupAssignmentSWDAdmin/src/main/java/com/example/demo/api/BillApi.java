@@ -28,5 +28,7 @@ public interface BillApi {
     @GetMapping("{billID}")
     ResponseEntity<List<BillDetailDTO>> getAllProductOfBill(@PathVariable Integer billID);
 
-
+    @ApiOperation(tags = {"Bill",}, notes = "", value = "Update status of bill")
+    @PutMapping("/updateBillStatus/{id}")
+    ResponseEntity<Map<String, Boolean>> updateBillStatus(@PathVariable Integer id);
 }

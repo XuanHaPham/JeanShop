@@ -9,5 +9,6 @@ public interface BillService {
     Boolean create(List<BillDetailDTO> billDetailDTOS, Integer accountID);
     List<BillDTO> getAllBill();
     List<BillDetailDTO> getAllProductOfBill(Integer billID);
+    Boolean updateStatus(Integer id);
 
 }
